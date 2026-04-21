@@ -151,6 +151,7 @@
   .crypto-name.btc { color:#f7931a; }
   .crypto-name.bnb { color:#f3ba2f; }
   .crypto-name.sol { color:#9945ff; }
+  .crypto-name.eth { color:#627eea; }
   .crypto-price { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:700; margin:6px 0; }
   .crypto-chg { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:12px; padding:2px 8px; border-radius:4px; }
   .chg-pos { background:#0e2418; color:var(--green); }
@@ -258,7 +259,8 @@
     <div class="ov-strip">
       <div class="ov-card"><div class="lbl">Tasks Done</div><div class="val c-green" id="ov-done">0</div><div class="sub">of <span id="ov-total">0</span> total</div></div>
       <div class="ov-card"><div class="lbl">Stocks Watching</div><div class="val c-gold" id="ov-stocks-n">0</div><div class="sub">value + growth</div></div>
-      <div class="ov-card"><div class="lbl">Fear &amp; Greed</div><div class="val" id="ov-fg-score" style="color:var(--text-muted)">—</div><div class="sub" id="ov-fg-lbl" style="color:var(--text-muted)">loading…</div></div>
+      <div class="ov-card"><div class="lbl">📈 CNN F&amp;G (Stocks)</div><div class="val" id="ov-fg-score" style="color:var(--text-muted)">—</div><div class="sub" id="ov-fg-lbl" style="color:var(--text-muted)">enter score</div></div>
+      <div class="ov-card"><div class="lbl">₿ Crypto F&amp;G</div><div class="val" id="ov-cfg-score" style="color:var(--text-muted)">—</div><div class="sub" id="ov-cfg-lbl" style="color:var(--text-muted)">loading…</div></div>
       <div class="ov-card"><div class="lbl">BTC</div><div class="val c-gold" id="ov-btc">—</div><div class="sub" id="ov-btc-ch">—</div></div>
       <div class="ov-card"><div class="lbl">Decisions Open</div><div class="val c-blue" id="ov-decs">0</div><div class="sub">buy + wait</div></div>
     </div>
@@ -278,15 +280,46 @@
         </div>
       </div>
       <div>
+        <!-- CNN Stock F&G — Manual Input -->
+        <div class="fg-block" style="margin-bottom:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+            <div class="fg-title" style="margin-bottom:0;">📈 CNN Fear &amp; Greed — Stocks</div>
+            <a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" style="font-size:11px;color:var(--gold-dim);text-decoration:none;border:1px solid var(--border2);padding:4px 10px;border-radius:5px;">Open CNN →</a>
+          </div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Check CNN, type the number below. Updates your buy signal instantly.</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <input id="cnn-score-input" type="number" min="0" max="100" placeholder="e.g. 23"
+              style="width:90px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 12px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;outline:none;text-align:center;"
+              onkeydown="if(event.key==='Enter')saveCnnScore()">
+            <button class="btn-gold" onclick="saveCnnScore()">Update</button>
+            <div>
+              <div class="fg-score" id="cnn-big" style="color:var(--text-muted);font-size:38px;">—</div>
+              <div class="fg-label" id="cnn-lbl" style="color:var(--text-muted);font-size:13px;">Not set yet</div>
+            </div>
+          </div>
+          <div class="fg-meter"><div class="fg-needle" id="cnn-needle" style="left:50%"></div></div>
+          <div class="fg-ticks"><span>0 Extreme Fear</span><span>25</span><span>50 Neutral</span><span>75</span><span>100 Greed</span></div>
+          <div class="fg-alert-box neutral" id="cnn-alert-box" style="margin-top:10px;">Enter today's CNN score above.</div>
+          <div class="fg-update" id="cnn-updated">Last updated: —</div>
+        </div>
+
+        <!-- Crypto F&G — Auto fetch -->
         <div class="fg-block">
-          <div class="fg-title">📊 Fear &amp; Greed Index — Market Sentiment</div>
-          <div class="fg-score" id="fg-big" style="color:var(--text-muted)">—</div>
-          <div class="fg-label" id="fg-lbl" style="color:var(--text-muted)">Loading…</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+            <div class="fg-title" style="margin-bottom:0;">₿ Crypto Fear &amp; Greed — Bitcoin</div>
+            <button class="btn-small" style="margin-top:0;" onclick="fetchCryptoFG()">↺ Refresh</button>
+          </div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Auto-fetched from Alternative.me · Tracks Bitcoin/crypto sentiment only.</div>
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;">
+            <div>
+              <div class="fg-score" id="fg-big" style="color:var(--text-muted);font-size:38px;">—</div>
+              <div class="fg-label" id="fg-lbl" style="color:var(--text-muted);font-size:13px;">Loading…</div>
+            </div>
+          </div>
           <div class="fg-meter"><div class="fg-needle" id="fg-needle" style="left:50%"></div></div>
           <div class="fg-ticks"><span>0 Extreme Fear</span><span>25</span><span>50 Neutral</span><span>75</span><span>100 Greed</span></div>
-          <div class="fg-alert-box neutral" id="fg-alert-box">Fetching market sentiment data…</div>
+          <div class="fg-alert-box neutral" id="fg-alert-box" style="margin-top:10px;">Fetching crypto sentiment…</div>
           <div class="fg-update" id="fg-updated">Last updated: —</div>
-          <button class="btn-small" onclick="fetchFearGreed()">↺ Refresh</button>
         </div>
       </div>
     </div>
@@ -336,6 +369,7 @@
       <div class="stock-tabs">
         <div class="stock-tab active" onclick="switchStockTab('value')">📊 Value Stocks</div>
         <div class="stock-tab" onclick="switchStockTab('growth')">🚀 Growth Stocks</div>
+        <div class="stock-tab" onclick="switchStockTab('tech')">🤖 Tech / AI / EV / Semi</div>
       </div>
 
       <div id="stock-value-panel">
@@ -345,7 +379,7 @@
         <div style="overflow-x:auto;">
           <table class="stock-table">
             <thead><tr>
-              <th>Ticker</th><th>Quality / Moat</th><th>Price / Fair Value</th>
+              <th>Ticker</th><th>Current Price</th><th>Quality / Moat</th><th>Fair Value</th>
               <th>Buy Zone</th><th>MoS %</th><th>Thesis</th><th>Key Risk</th><th>Action</th><th></th>
             </tr></thead>
             <tbody id="value-tbody"></tbody>
@@ -353,10 +387,11 @@
         </div>
         <div class="add-row" style="margin-top:14px;">
           <input id="v-ticker" type="text" placeholder="TICKER" style="max-width:80px;text-transform:uppercase;">
-          <input id="v-quality" type="text" placeholder="Quality / Moat" style="max-width:140px;">
-          <input id="v-price" type="text" placeholder="Price / Fair Val" style="max-width:130px;">
-          <input id="v-zone" type="text" placeholder="Buy zone" style="max-width:100px;">
-          <input id="v-mos" type="text" placeholder="MoS %" style="max-width:70px;">
+          <input id="v-curprice" type="text" placeholder="Current $" style="max-width:90px;">
+          <input id="v-quality" type="text" placeholder="Quality / Moat" style="max-width:130px;">
+          <input id="v-price" type="text" placeholder="Fair Value" style="max-width:100px;">
+          <input id="v-zone" type="text" placeholder="Buy zone" style="max-width:90px;">
+          <input id="v-mos" type="text" placeholder="MoS %" style="max-width:65px;">
           <input id="v-thesis" type="text" placeholder="Thesis">
           <input id="v-risk" type="text" placeholder="Key risk">
           <select id="v-action"><option>BUY</option><option>WAIT</option><option>WATCH</option></select>
@@ -371,35 +406,88 @@
         <div style="overflow-x:auto;">
           <table class="stock-table">
             <thead><tr>
-              <th>Ticker</th><th>Sector</th><th>Price / 52w High</th>
-              <th>Rev Growth</th><th>PEG / P/S</th><th>Why I Like It</th><th>Key Risk</th><th>Action</th><th></th>
+              <th>Ticker</th><th>Sector</th><th>Current Price</th><th>52w High</th>
+              <th>Rev Growth</th><th>5Y Avg Return</th><th>PEG / P/S</th><th>Why I Like It</th><th>Key Risk</th><th>Action</th><th></th>
             </tr></thead>
             <tbody id="growth-tbody"></tbody>
           </table>
         </div>
         <div class="add-row" style="margin-top:14px;">
-          <input id="g-ticker" type="text" placeholder="TICKER" style="max-width:80px;text-transform:uppercase;">
-          <input id="g-sector" type="text" placeholder="Sector" style="max-width:110px;">
-          <input id="g-price" type="text" placeholder="Price / 52w High" style="max-width:130px;">
-          <input id="g-growth" type="text" placeholder="Rev Growth %" style="max-width:110px;">
-          <input id="g-peg" type="text" placeholder="PEG / P/S" style="max-width:90px;">
+          <input id="g-ticker" type="text" placeholder="TICKER" style="max-width:75px;text-transform:uppercase;">
+          <input id="g-sector" type="text" placeholder="Sector" style="max-width:100px;">
+          <input id="g-curprice" type="text" placeholder="Current $" style="max-width:85px;">
+          <input id="g-price" type="text" placeholder="52w High" style="max-width:85px;">
+          <input id="g-growth" type="text" placeholder="Rev Growth" style="max-width:90px;">
+          <input id="g-5yr" type="text" placeholder="5Y Avg Ret" style="max-width:85px;">
+          <input id="g-peg" type="text" placeholder="PEG/P/S" style="max-width:75px;">
           <input id="g-thesis" type="text" placeholder="Why I like it">
           <input id="g-risk" type="text" placeholder="Key risk">
           <select id="g-action"><option>BUY</option><option>WAIT</option><option>WATCH</option></select>
           <button class="btn-gold" onclick="addStock('growth')">+ Add</button>
         </div>
+
+      <div id="stock-tech-panel" style="display:none;">
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:12px;line-height:1.5;">
+          <b style="color:var(--text)">Tech / AI / EV / Semiconductors:</b> Stocks that have delivered ~30%+ average annual returns over 5 years. High volatility — buy on fear, not greed. Use CNN F&amp;G below 25 as entry signal.
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="stock-table">
+            <thead><tr>
+              <th>Ticker</th><th>Current Price</th><th>Sector</th><th>5Y Avg Return</th>
+              <th>Rev Growth</th><th>Buy Zone</th><th>Why It Qualifies</th><th>Key Risk</th><th>Action</th><th></th>
+            </tr></thead>
+            <tbody id="tech-tbody"></tbody>
+          </table>
+        </div>
+        <div class="add-row" style="margin-top:14px;">
+          <input id="t-ticker" type="text" placeholder="TICKER" style="max-width:75px;text-transform:uppercase;">
+          <input id="t-curprice" type="text" placeholder="Current $" style="max-width:85px;">
+          <input id="t-sector" type="text" placeholder="Sector" style="max-width:110px;">
+          <input id="t-5yr" type="text" placeholder="5Y Avg Ret" style="max-width:90px;">
+          <input id="t-growth" type="text" placeholder="Rev Growth" style="max-width:90px;">
+          <input id="t-zone" type="text" placeholder="Buy zone" style="max-width:90px;">
+          <input id="t-thesis" type="text" placeholder="Why it qualifies">
+          <input id="t-risk" type="text" placeholder="Key risk">
+          <select id="t-action"><option>BUY</option><option>WAIT</option><option>WATCH</option></select>
+          <button class="btn-gold" onclick="addStock('tech')">+ Add</button>
+        </div>
+        <div style="margin-top:14px;font-size:12px;color:var(--text-muted);line-height:1.7;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;">
+          💡 <b style="color:var(--text-dim)">5-Year avg return benchmark (approx, price return only):</b>
+          NVDA ~+85%/yr · SMCI ~+60%/yr · AMD ~+38%/yr · TSLA ~+32%/yr · META ~+30%/yr · AVGO ~+42%/yr · ANET ~+36%/yr · ARM ~N/A (IPO 2023) · PLTR ~+35%/yr
+          <br>These are high-volatility names. Sizing discipline and entry timing matter more than with value stocks.
+        </div>
+      </div>
       </div>
     </div>
   </div>
 
   <!-- CRYPTO -->
   <div class="panel" id="panel-crypto">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-      <span style="font-size:13px;color:var(--text-muted);">Live prices · CoinGecko · Last: <span id="crypto-updated">—</span></span>
-      <button class="btn-small" onclick="fetchCryptoPrices()">↺ Refresh</button>
+    <!-- WATCHLIST TABLE -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div class="card-title" style="margin-bottom:0;"><div class="dot purple"></div> Crypto Watchlist — Live Prices</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:12px;color:var(--text-muted);">Last: <span id="crypto-updated">—</span></span>
+          <button class="btn-small" style="margin-top:0;" onclick="fetchCryptoPrices()">↺ Refresh</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="stock-table">
+          <thead><tr>
+            <th>Coin</th><th>Current Price</th><th>24h Change</th><th>ATH</th><th>% from ATH</th>
+            <th>Market Cap</th><th>Narrative</th><th>My Target</th><th>Action</th>
+          </tr></thead>
+          <tbody id="crypto-watchlist-tbody"></tbody>
+        </table>
+      </div>
     </div>
-    <div class="grid-3" id="crypto-grid"></div>
-    <div class="card" style="margin-top:16px;">
+
+    <!-- NARRATIVE CARDS -->
+    <div class="grid-3" id="crypto-grid" style="margin-bottom:16px;"></div>
+
+    <!-- NOTES -->
+    <div class="card">
       <div class="card-title"><div class="dot blue"></div> Market Narrative Notes</div>
       <textarea id="crypto-notes" style="width:100%;background:transparent;border:none;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;resize:vertical;outline:none;min-height:80px;" placeholder="Your read on the current cycle, macro backdrop, key catalysts and risks…"></textarea>
     </div>
@@ -520,10 +608,10 @@
 <script>
 // ── STATE ──
 let state = {
-  tasks:[], valueStocks:[], growthStocks:[],
+  tasks:[], valueStocks:[], growthStocks:[], techStocks:[], cryptoTargets:{},
   decisions:{buy:[],wait:[],delegate:[],ignore:[]},
   news:[], biz:{wedding:[],ecom:[],ai:[],web3:[],creator:[]},
-  review:{}, cryptoNotes:'', newsAnalysis:'', apiKeys:{}, lastFg:null
+  review:{}, cryptoNotes:'', newsAnalysis:'', apiKeys:{}, lastFg:null, lastCnnFg:null
 };
 
 const QUOTES = [
@@ -602,14 +690,16 @@ function actClass(a){ return a==='BUY'?'act-buy':a==='WAIT'?'act-wait':'act-watc
 function renderValueStocks(){
   const tb=document.getElementById('value-tbody'); if(!tb) return; tb.innerHTML='';
   state.valueStocks.forEach((s,i)=>{
+    const cp=s.curprice||'—';
     tb.innerHTML+=`<tr>
       <td class="ticker">${s.ticker}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--text)">${cp}</td>
       <td style="font-size:13px;color:var(--text-dim)">${s.quality}</td>
-      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;">${s.price}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim)">${s.price}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold)">${s.zone}</td>
       <td><span class="mos-badge ${mosClass(s.mos)}">${s.mos}</span></td>
-      <td style="font-size:12px;color:var(--text-dim);max-width:180px">${s.thesis}</td>
-      <td style="font-size:12px;color:var(--red);max-width:140px">${s.risk}</td>
+      <td style="font-size:12px;color:var(--text-dim);max-width:160px">${s.thesis}</td>
+      <td style="font-size:12px;color:var(--red);max-width:130px">${s.risk}</td>
       <td><span class="act-badge ${actClass(s.action)}">${s.action}</span></td>
       <td><span class="del-btn" onclick="removeStock('value',${i})">×</span></td>
     </tr>`;
@@ -618,14 +708,17 @@ function renderValueStocks(){
 function renderGrowthStocks(){
   const tb=document.getElementById('growth-tbody'); if(!tb) return; tb.innerHTML='';
   state.growthStocks.forEach((s,i)=>{
+    const cp=s.curprice||'—';
     tb.innerHTML+=`<tr>
       <td class="ticker">${s.ticker}</td>
       <td style="font-size:13px;color:var(--text-dim)">${s.sector}</td>
-      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;">${s.price}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--text)">${cp}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim)">${s.price}</td>
       <td style="font-size:13px;color:var(--green);font-weight:600">${s.growth}</td>
+      <td style="font-size:13px;color:var(--blue);font-weight:600">${s.fiveyr||'—'}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim)">${s.peg}</td>
-      <td style="font-size:12px;color:var(--text-dim);max-width:180px">${s.thesis}</td>
-      <td style="font-size:12px;color:var(--red);max-width:140px">${s.risk}</td>
+      <td style="font-size:12px;color:var(--text-dim);max-width:160px">${s.thesis}</td>
+      <td style="font-size:12px;color:var(--red);max-width:130px">${s.risk}</td>
       <td><span class="act-badge ${actClass(s.action)}">${s.action}</span></td>
       <td><span class="del-btn" onclick="removeStock('growth',${i})">×</span></td>
     </tr>`;
@@ -634,68 +727,114 @@ function renderGrowthStocks(){
 function addStock(type){
   if(type==='value'){
     const t=document.getElementById('v-ticker').value.trim().toUpperCase(); if(!t) return;
-    state.valueStocks.push({ticker:t,quality:document.getElementById('v-quality').value,price:document.getElementById('v-price').value,zone:document.getElementById('v-zone').value,mos:document.getElementById('v-mos').value,thesis:document.getElementById('v-thesis').value,risk:document.getElementById('v-risk').value,action:document.getElementById('v-action').value});
-    ['v-ticker','v-quality','v-price','v-zone','v-mos','v-thesis','v-risk'].forEach(id=>document.getElementById(id).value='');
+    state.valueStocks.push({ticker:t,curprice:document.getElementById('v-curprice').value,quality:document.getElementById('v-quality').value,price:document.getElementById('v-price').value,zone:document.getElementById('v-zone').value,mos:document.getElementById('v-mos').value,thesis:document.getElementById('v-thesis').value,risk:document.getElementById('v-risk').value,action:document.getElementById('v-action').value});
+    ['v-ticker','v-curprice','v-quality','v-price','v-zone','v-mos','v-thesis','v-risk'].forEach(id=>document.getElementById(id).value='');
     save(); renderValueStocks(); refreshOverview(); showToast('Value stock added ✓');
-  } else {
+  } else if(type==='growth'){
     const t=document.getElementById('g-ticker').value.trim().toUpperCase(); if(!t) return;
-    state.growthStocks.push({ticker:t,sector:document.getElementById('g-sector').value,price:document.getElementById('g-price').value,growth:document.getElementById('g-growth').value,peg:document.getElementById('g-peg').value,thesis:document.getElementById('g-thesis').value,risk:document.getElementById('g-risk').value,action:document.getElementById('g-action').value});
-    ['g-ticker','g-sector','g-price','g-growth','g-peg','g-thesis','g-risk'].forEach(id=>document.getElementById(id).value='');
+    state.growthStocks.push({ticker:t,sector:document.getElementById('g-sector').value,curprice:document.getElementById('g-curprice').value,price:document.getElementById('g-price').value,growth:document.getElementById('g-growth').value,fiveyr:document.getElementById('g-5yr').value,peg:document.getElementById('g-peg').value,thesis:document.getElementById('g-thesis').value,risk:document.getElementById('g-risk').value,action:document.getElementById('g-action').value});
+    ['g-ticker','g-sector','g-curprice','g-price','g-growth','g-5yr','g-peg','g-thesis','g-risk'].forEach(id=>document.getElementById(id).value='');
     save(); renderGrowthStocks(); refreshOverview(); showToast('Growth stock added ✓');
+  } else {
+    const t=document.getElementById('t-ticker').value.trim().toUpperCase(); if(!t) return;
+    state.techStocks.push({ticker:t,curprice:document.getElementById('t-curprice').value,sector:document.getElementById('t-sector').value,fiveyr:document.getElementById('t-5yr').value,growth:document.getElementById('t-growth').value,zone:document.getElementById('t-zone').value,thesis:document.getElementById('t-thesis').value,risk:document.getElementById('t-risk').value,action:document.getElementById('t-action').value});
+    ['t-ticker','t-curprice','t-sector','t-5yr','t-growth','t-zone','t-thesis','t-risk'].forEach(id=>document.getElementById(id).value='');
+    save(); renderTechStocks(); refreshOverview(); showToast('Tech stock added ✓');
   }
 }
 function removeStock(type,i){
   if(type==='value'){ state.valueStocks.splice(i,1); renderValueStocks(); }
-  else { state.growthStocks.splice(i,1); renderGrowthStocks(); }
+  else if(type==='growth'){ state.growthStocks.splice(i,1); renderGrowthStocks(); }
+  else { state.techStocks.splice(i,1); renderTechStocks(); }
   save(); refreshOverview();
 }
 
-// ── FEAR & GREED ──
+function renderTechStocks(){
+  const tb=document.getElementById('tech-tbody'); if(!tb) return; tb.innerHTML='';
+  (state.techStocks||[]).forEach((s,i)=>{
+    const cp=s.curprice||'—';
+    const fyr=s.fiveyr||'—';
+    const isHigh=parseFloat(fyr)>=30;
+    tb.innerHTML+=`<tr>
+      <td class="ticker">${s.ticker}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--text)">${cp}</td>
+      <td style="font-size:13px;color:var(--text-dim)">${s.sector}</td>
+      <td style="font-size:13px;font-weight:700;color:${isHigh?'var(--green)':'var(--orange)'}">${fyr}</td>
+      <td style="font-size:13px;color:var(--green);font-weight:600">${s.growth||'—'}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold)">${s.zone||'—'}</td>
+      <td style="font-size:12px;color:var(--text-dim);max-width:160px">${s.thesis}</td>
+      <td style="font-size:12px;color:var(--red);max-width:130px">${s.risk}</td>
+      <td><span class="act-badge ${actClass(s.action)}">${s.action}</span></td>
+      <td><span class="del-btn" onclick="removeStock('tech',${i})">×</span></td>
+    </tr>`;
+  });
+}
+
+// ── FEAR & GREED HELPERS ──
 function fgColor(s){ return s<=25?'var(--red)':s<=45?'var(--orange)':s<=55?'var(--gold)':'var(--green)'; }
 function fgLabel(s){ return s<=25?'Extreme Fear':s<=45?'Fear':s<=55?'Neutral':s<=75?'Greed':'Extreme Greed'; }
 
-function applyFgUI(score, ts){
+function applyFgBlock(score, ts, ids){
+  // ids = { big, lbl, needle, alertBox, updated }
   const color=fgColor(score), label=fgLabel(score);
-
-  // Big display
-  const bigEl=document.getElementById('fg-big'); if(bigEl){ bigEl.textContent=score; bigEl.style.color=color; }
-  const lblEl=document.getElementById('fg-lbl'); if(lblEl){ lblEl.textContent=label; lblEl.style.color=color; }
-  const needle=document.getElementById('fg-needle'); if(needle) needle.style.left=score+'%';
-  const updEl=document.getElementById('fg-updated'); if(updEl) updEl.textContent='Last updated: '+ts;
-
-  // Alert box
-  const ab=document.getElementById('fg-alert-box');
+  const bigEl=document.getElementById(ids.big); if(bigEl){ bigEl.textContent=score; bigEl.style.color=color; }
+  const lblEl=document.getElementById(ids.lbl); if(lblEl){ lblEl.textContent=label; lblEl.style.color=color; }
+  const needle=document.getElementById(ids.needle); if(needle) needle.style.left=score+'%';
+  const updEl=document.getElementById(ids.updated); if(updEl) updEl.textContent='Last updated: '+ts;
+  const ab=document.getElementById(ids.alertBox);
   if(ab){
     if(score<=25){
       ab.className='fg-alert-box extreme-fear';
-      ab.innerHTML='🚨 <b>EXTREME FEAR — BUY SIGNAL.</b> Market sentiment is at panic levels. This is historically the best time to deploy capital into your watchlist stocks. Review your BUY-zone stocks now.';
+      ab.innerHTML='🚨 <b>EXTREME FEAR ('+score+') — BUY SIGNAL.</b> '+ids.context+' Panic levels = historically the best time to deploy capital. Check your BUY-zone watchlist now.';
     } else if(score<=45){
       ab.className='fg-alert-box fear';
-      ab.innerHTML='⚠️ <b>Fear zone ('+score+').</b> Market is nervous. Good time to prepare buy orders. When this drops below 25, deploy capital.';
+      ab.innerHTML='⚠️ <b>Fear ('+score+').</b> Market nervous. Prepare your buy orders. Deploy when score drops below 25.';
     } else if(score<=55){
       ab.className='fg-alert-box neutral';
-      ab.innerHTML='📊 <b>Neutral ('+score+').</b> No strong signal. Stick to your strategy and wait for fear to return before buying.';
+      ab.innerHTML='📊 <b>Neutral ('+score+').</b> No strong signal. Stick to strategy, wait for fear to return.';
     } else {
       ab.className='fg-alert-box greed';
-      ab.innerHTML='😰 <b>'+label+' ('+score+').</b> Others are greedy — be cautious. Avoid chasing stocks at high prices. Patience now, deploy when fear returns.';
+      ab.innerHTML='😰 <b>'+label+' ('+score+').</b> Others are greedy — be cautious. Avoid chasing. Wait for fear before deploying.';
     }
   }
+}
 
+// ── CNN STOCK F&G — MANUAL ──
+function saveCnnScore(){
+  const inp=document.getElementById('cnn-score-input');
+  const score=parseInt(inp.value);
+  if(isNaN(score)||score<0||score>100){ inp.style.borderColor='var(--red)'; setTimeout(()=>inp.style.borderColor='',1500); return; }
+  const ts=new Date().toLocaleString('en-MY',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  state.lastCnnFg={score,ts}; save();
+  applyCnnFgUI(score,ts);
+  inp.value='';
+  showToast('CNN score updated ✓');
+}
+
+function applyCnnFgUI(score, ts){
+  applyFgBlock(score, ts, {big:'cnn-big',lbl:'cnn-lbl',needle:'cnn-needle',alertBox:'cnn-alert-box',updated:'cnn-updated',context:'Stock market sentiment.'});
   // Overview strip
-  const ovs=document.getElementById('ov-fg-score'); if(ovs){ ovs.textContent=score; ovs.style.color=color; }
-  const ovl=document.getElementById('ov-fg-lbl'); if(ovl){ ovl.textContent=label; ovl.style.color=color; }
-
-  // Top banner — only for extreme fear (≤25)
+  const ovs=document.getElementById('ov-fg-score'); if(ovs){ ovs.textContent=score; ovs.style.color=fgColor(score); }
+  const ovl=document.getElementById('ov-fg-lbl'); if(ovl){ ovl.textContent=fgLabel(score); ovl.style.color=fgColor(score); }
+  // Top banner for extreme fear on stocks
   const banner=document.getElementById('fg-banner');
   if(score<=25){
-    document.getElementById('fg-banner-text').textContent='🚨 Fear & Greed Index: '+score+' — EXTREME FEAR. This is your buy signal. Check your watchlist now.';
+    document.getElementById('fg-banner-text').textContent='🚨 CNN Fear & Greed (Stocks): '+score+' — EXTREME FEAR. This is your stock buy signal. Check your watchlist now.';
     banner.classList.add('show');
   } else {
     banner.classList.remove('show');
   }
 }
 
-async function fetchFearGreed(){
+// ── CRYPTO F&G — AUTO FETCH ──
+function applyCryptoFgUI(score, ts){
+  applyFgBlock(score, ts, {big:'fg-big',lbl:'fg-lbl',needle:'fg-needle',alertBox:'fg-alert-box',updated:'fg-updated',context:'Crypto/Bitcoin sentiment.'});
+  // Overview strip
+  const ovs=document.getElementById('ov-cfg-score'); if(ovs){ ovs.textContent=score; ovs.style.color=fgColor(score); }
+  const ovl=document.getElementById('ov-cfg-lbl'); if(ovl){ ovl.textContent=fgLabel(score); ovl.style.color=fgColor(score); }
+}
+
+async function fetchCryptoFG(){
   const bigEl=document.getElementById('fg-big'); if(bigEl){ bigEl.textContent='…'; bigEl.style.color='var(--text-muted)'; }
   try {
     const res=await fetch('https://api.alternative.me/fng/?limit=1&format=json');
@@ -704,25 +843,71 @@ async function fetchFearGreed(){
     const score=parseInt(entry.value);
     const ts=new Date(parseInt(entry.timestamp)*1000).toLocaleString('en-MY',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
     state.lastFg={score,ts}; save();
-    applyFgUI(score,ts);
+    applyCryptoFgUI(score,ts);
   } catch(e){
-    if(state.lastFg) { applyFgUI(state.lastFg.score, state.lastFg.ts+' (cached)'); }
-    else { const b=document.getElementById('fg-big'); if(b) b.textContent='—'; const u=document.getElementById('fg-updated'); if(u) u.textContent='Could not load. Check connection or try again.'; }
+    if(state.lastFg) { applyCryptoFgUI(state.lastFg.score, state.lastFg.ts+' (cached)'); }
+    else { const b=document.getElementById('fg-big'); if(b) b.textContent='—'; }
   }
 }
 
 // ── CRYPTO ──
 const CRYPTO_META={
-  bitcoin:    {sym:'BTC',cls:'btc',narrative:'Digital gold, macro hedge, institutional gateway. ETF flows and halving cycle are primary drivers.',catalyst:'ETF inflows, halving supply shock, Fed rate cuts'},
-  binancecoin:{sym:'BNB',cls:'bnb',narrative:'BSC ecosystem backbone. Utility for fee discounts, Launchpad, and DeFi. Regulatory risk is key variable.',catalyst:'Binance legal outcomes, BSC DeFi TVL growth'},
-  solana:     {sym:'SOL',cls:'sol',narrative:'Top DEX spot-trading chain in Q1 2026. Fast L1 with growing DeFi and memecoin ecosystem.',catalyst:'DEX volume, developer activity, institutional ETF speculation'}
+  bitcoin:    {sym:'BTC',cls:'btc',ath:'$73,750',narrative:'Digital gold, macro hedge, institutional gateway. ETF flows and halving cycle are primary drivers.',catalyst:'ETF inflows, halving supply shock, Fed rate cuts'},
+  ethereum:   {sym:'ETH',cls:'eth',ath:'$4,878',narrative:'Smart contract platform. DeFi, NFT, and Layer-2 ecosystem backbone. ETF approval catalyst in play.',catalyst:'ETF flows, L2 adoption, EIP upgrades'},
+  solana:     {sym:'SOL',cls:'sol',ath:'$295',narrative:'Top DEX spot-trading chain Q1 2026. High-throughput L1 with strong DeFi and memecoin ecosystem.',catalyst:'DEX volume, developer activity, institutional ETF speculation'},
+  binancecoin:{sym:'BNB',cls:'bnb',ath:'$788',narrative:'BSC ecosystem backbone. Utility for fee discounts, Launchpad, and DeFi. Regulatory risk is the key variable.',catalyst:'Binance legal outcomes, BSC DeFi TVL growth'}
 };
+
+const CRYPTO_WATCH=['bitcoin','ethereum','solana','binancecoin'];
+
+function renderCryptoWatchlist(prices){
+  const tb=document.getElementById('crypto-watchlist-tbody'); if(!tb) return; tb.innerHTML='';
+  CRYPTO_WATCH.forEach(id=>{
+    const m=CRYPTO_META[id]; const d=prices&&prices[id];
+    const price=d?'$'+Number(d.usd).toLocaleString(undefined,{maximumFractionDigits:2}):'<span class="loading-pulse">…</span>';
+    const chg=d?d.usd_24h_change:null;
+    const chgHtml=chg!=null?`<span class="crypto-chg ${chg>=0?'chg-pos':'chg-neg'}">${chg>=0?'+':''}${chg.toFixed(2)}%</span>`:'<span class="loading-pulse">—</span>';
+    const mcap=d&&d.usd_market_cap?'$'+millify(d.usd_market_cap):'—';
+    // % from ATH
+    let athPct='—';
+    if(d&&d.usd){
+      const athNum=parseFloat(m.ath.replace(/[$,]/g,''));
+      const pct=((d.usd-athNum)/athNum*100);
+      athPct=`<span style="color:${pct>=0?'var(--green)':'var(--red)'}">${pct>=0?'+':''}${pct.toFixed(1)}%</span>`;
+    }
+    const target=state.cryptoTargets&&state.cryptoTargets[id]?state.cryptoTargets[id]:'—';
+    tb.innerHTML+=`<tr>
+      <td><span class="crypto-name ${m.cls}" style="font-size:16px;">${m.sym}</span></td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)">${price}</td>
+      <td>${chgHtml}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted)">${m.ath}</td>
+      <td style="font-size:12px;">${athPct}</td>
+      <td style="font-size:12px;color:var(--text-dim)">${mcap}</td>
+      <td style="font-size:12px;color:var(--text-dim);max-width:180px">${m.narrative.split('.')[0]}.</td>
+      <td><input type="text" value="${target}" onchange="setCryptoTarget('${id}',this.value)"
+        style="background:var(--surface2);border:1px solid var(--border2);border-radius:5px;padding:4px 8px;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:12px;width:90px;outline:none;"></td>
+      <td><span class="act-badge act-watch" style="cursor:default;">WATCH</span></td>
+    </tr>`;
+  });
+}
+
+function setCryptoTarget(id,val){
+  if(!state.cryptoTargets) state.cryptoTargets={};
+  state.cryptoTargets[id]=val; save();
+}
+
+function millify(n){
+  if(n>=1e12) return (n/1e12).toFixed(2)+'T';
+  if(n>=1e9)  return (n/1e9).toFixed(1)+'B';
+  if(n>=1e6)  return (n/1e6).toFixed(1)+'M';
+  return n.toLocaleString();
+}
 
 function renderCryptoCards(prices){
   const grid=document.getElementById('crypto-grid'); if(!grid) return; grid.innerHTML='';
-  ['bitcoin','binancecoin','solana'].forEach(id=>{
+  CRYPTO_WATCH.forEach(id=>{
     const m=CRYPTO_META[id],d=prices&&prices[id];
-    const price=d?'$'+Number(d.usd).toLocaleString():'<span class="loading-pulse">Fetching…</span>';
+    const price=d?'$'+Number(d.usd).toLocaleString(undefined,{maximumFractionDigits:2}):'<span class="loading-pulse">Fetching…</span>';
     const chg=d?d.usd_24h_change:null;
     const chgH=chg!=null?`<span class="crypto-chg ${chg>=0?'chg-pos':'chg-neg'}">${chg>=0?'+':''}${chg.toFixed(2)}%</span>`:'<span class="loading-pulse">—</span>';
     grid.innerHTML+=`<div class="crypto-card">
@@ -740,10 +925,13 @@ function renderCryptoCards(prices){
 
 async function fetchCryptoPrices(){
   renderCryptoCards(null);
+  renderCryptoWatchlist(null);
   try {
-    const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,binancecoin,solana&vs_currencies=usd&include_24hr_change=true');
+    const ids=CRYPTO_WATCH.join(',');
+    const res=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`);
     const data=await res.json();
     renderCryptoCards(data);
+    renderCryptoWatchlist(data);
     document.getElementById('crypto-updated').textContent=new Date().toLocaleTimeString('en-MY',{hour12:false});
     if(data.bitcoin){
       const ov=document.getElementById('ov-btc'); if(ov) ov.textContent='$'+Number(data.bitcoin.usd).toLocaleString();
@@ -751,7 +939,8 @@ async function fetchCryptoPrices(){
       if(oc){ const c=data.bitcoin.usd_24h_change; oc.textContent=(c>=0?'+':'')+c.toFixed(2)+'% 24h'; oc.style.color=c>=0?'var(--green)':'var(--red)'; }
     }
   } catch(e){
-    document.getElementById('crypto-grid').innerHTML='<div style="color:var(--text-muted);font-size:13px;padding:10px;grid-column:span 3;">Rate limited by CoinGecko. Try again in a moment.</div>';
+    const g=document.getElementById('crypto-grid');
+    if(g) g.innerHTML='<div style="color:var(--text-muted);font-size:13px;padding:10px;grid-column:span 4;">Rate limited by CoinGecko. Try again in a moment.</div>';
   }
 }
 
@@ -840,7 +1029,7 @@ function refreshOverview(){
   const done=state.tasks.filter(t=>t.done).length, total=state.tasks.length;
   const od=document.getElementById('ov-done'); if(od) od.textContent=done;
   const ot=document.getElementById('ov-total'); if(ot) ot.textContent=total;
-  const os=document.getElementById('ov-stocks-n'); if(os) os.textContent=state.valueStocks.length+state.growthStocks.length;
+  const os=document.getElementById('ov-stocks-n'); if(os) os.textContent=state.valueStocks.length+state.growthStocks.length+(state.techStocks||[]).length;
 
   const top3El=document.getElementById('ov-top3');
   if(top3El){
@@ -854,14 +1043,15 @@ function refreshOverview(){
   }
   const bzEl=document.getElementById('ov-buys');
   if(bzEl){
-    const items=[...state.valueStocks,...state.growthStocks].filter(s=>s.action==='BUY');
+    const items=[...state.valueStocks,...state.growthStocks,...(state.techStocks||[])].filter(s=>s.action==='BUY');
     bzEl.innerHTML=items.length?items.map(s=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
       <span class="ticker">${s.ticker}</span>
       <span style="font-size:12px;color:var(--text-muted)">${s.zone||s.price||''}</span>
       <span class="act-badge act-buy">BUY</span>
     </div>`).join(''):'<div style="color:var(--text-muted);font-size:13px;">No stocks marked BUY yet.</div>';
   }
-  if(state.lastFg) applyFgUI(state.lastFg.score, state.lastFg.ts+' (cached)');
+  if(state.lastCnnFg) applyCnnFgUI(state.lastCnnFg.score, state.lastCnnFg.ts+' (saved)');
+  if(state.lastFg) applyCryptoFgUI(state.lastFg.score, state.lastFg.ts+' (cached)');
   const ovd=document.getElementById('ov-decs');
   if(ovd) ovd.textContent=(state.decisions.buy||[]).length+(state.decisions.wait||[]).length;
 }
@@ -878,18 +1068,28 @@ function seedIfEmpty(){
     {text:'Weekly P&L review',type:'review',done:false},
   ];
   if(!state.valueStocks.length) state.valueStocks=[
-    {ticker:'AAPL',quality:'Wide Moat ★★★★★',price:'$172 / $210',zone:'< $175',mos:'18%',thesis:'Ecosystem lock-in, services revenue growth, massive buybacks',risk:'China exposure, AI spend vs returns',action:'WAIT'},
-    {ticker:'MSFT',quality:'Wide Moat ★★★★★',price:'$415 / $480',zone:'< $380',mos:'13%',thesis:'Azure cloud growth + Copilot AI adoption across enterprise',risk:'OpenAI dependency, valuation premium',action:'WATCH'},
-    {ticker:'V',quality:'Wide Moat ★★★★★',price:'$278 / $340',zone:'< $260',mos:'22%',thesis:'Payment network duopoly, pricing power, capital-light model',risk:'Crypto disruption long-term, regulation',action:'BUY'},
-    {ticker:'BRK.B',quality:'Wide Moat ★★★★★',price:'$460 / $520',zone:'< $440',mos:'12%',thesis:'Diversified insurance + equity portfolio, fortress balance sheet',risk:'Succession uncertainty after Buffett',action:'WATCH'},
-    {ticker:'JNJ',quality:'Wide Moat ★★★★',price:'$155 / $180',zone:'< $148',mos:'14%',thesis:'Pharma pipeline + MedTech, defensive dividend grower',risk:'Litigation overhang, generic drug competition',action:'WATCH'},
+    {ticker:'AAPL',curprice:'$172',quality:'Wide Moat ★★★★★',price:'$210',zone:'< $175',mos:'18%',thesis:'Ecosystem lock-in, services revenue growth, massive buybacks',risk:'China exposure, AI spend vs returns',action:'WAIT'},
+    {ticker:'MSFT',curprice:'$415',quality:'Wide Moat ★★★★★',price:'$480',zone:'< $380',mos:'13%',thesis:'Azure cloud growth + Copilot AI adoption across enterprise',risk:'OpenAI dependency, valuation premium',action:'WATCH'},
+    {ticker:'V',curprice:'$278',quality:'Wide Moat ★★★★★',price:'$340',zone:'< $260',mos:'22%',thesis:'Payment network duopoly, pricing power, capital-light model',risk:'Crypto disruption long-term, regulation',action:'BUY'},
+    {ticker:'BRK.B',curprice:'$460',quality:'Wide Moat ★★★★★',price:'$520',zone:'< $440',mos:'12%',thesis:'Diversified insurance + equity portfolio, fortress balance sheet',risk:'Succession uncertainty after Buffett',action:'WATCH'},
+    {ticker:'JNJ',curprice:'$155',quality:'Wide Moat ★★★★',price:'$180',zone:'< $148',mos:'14%',thesis:'Pharma pipeline + MedTech, defensive dividend grower',risk:'Litigation overhang, generic drug competition',action:'WATCH'},
   ];
   if(!state.growthStocks.length) state.growthStocks=[
-    {ticker:'NVDA',sector:'AI / Semiconductors',price:'$880 / $974',growth:'+122% YoY',peg:'1.8',thesis:'AI compute dominance, data center GPU near-monopoly',risk:'China export restrictions, AMD/custom chip competition',action:'WAIT'},
-    {ticker:'META',sector:'Social / AI',price:'$512 / $589',growth:'+27% YoY',peg:'1.4',thesis:'Reels monetisation, AI ad targeting, Reality Labs optionality',risk:'Regulatory breakup risk, capex escalation',action:'BUY'},
-    {ticker:'CRWD',sector:'Cybersecurity',price:'$310 / $380',growth:'+33% YoY',peg:'3.2',thesis:'Best-of-breed endpoint security, sticky ARR, expanding platform',risk:'Outage reputation risk, slowing growth',action:'WATCH'},
-    {ticker:'TSLA',sector:'EV / Energy / Robotics',price:'$175 / $290',growth:'+2% YoY',peg:'N/A',thesis:'FSD autonomy optionality, Optimus robot wildcard, energy storage',risk:'Musk distraction, EV price war, execution',action:'WAIT'},
-    {ticker:'AMZN',sector:'Cloud / E-commerce',price:'$188 / $230',growth:'+17% YoY',peg:'2.1',thesis:'AWS dominance in cloud, ad revenue growing fast, Prime flywheel',risk:'Antitrust risk, AWS competition from Microsoft/Google',action:'WATCH'},
+    {ticker:'NVDA',sector:'AI / Semiconductors',curprice:'$880',price:'$974',growth:'+122% YoY',fiveyr:'+85%/yr',peg:'1.8',thesis:'AI compute dominance, data center GPU near-monopoly',risk:'China export restrictions, AMD/custom chip competition',action:'WAIT'},
+    {ticker:'META',sector:'Social / AI',curprice:'$512',price:'$589',growth:'+27% YoY',fiveyr:'+30%/yr',peg:'1.4',thesis:'Reels monetisation, AI ad targeting, Reality Labs optionality',risk:'Regulatory breakup risk, capex escalation',action:'BUY'},
+    {ticker:'CRWD',sector:'Cybersecurity',curprice:'$310',price:'$380',growth:'+33% YoY',fiveyr:'+28%/yr',peg:'3.2',thesis:'Best-of-breed endpoint security, sticky ARR, expanding platform',risk:'Outage reputation risk, slowing growth',action:'WATCH'},
+    {ticker:'TSLA',sector:'EV / Robotics',curprice:'$175',price:'$290',growth:'+2% YoY',fiveyr:'+32%/yr',peg:'N/A',thesis:'FSD autonomy optionality, Optimus robot wildcard, energy storage',risk:'Musk distraction, EV price war, execution',action:'WAIT'},
+    {ticker:'AMZN',sector:'Cloud / E-commerce',curprice:'$188',price:'$230',growth:'+17% YoY',fiveyr:'+18%/yr',peg:'2.1',thesis:'AWS dominance in cloud, ad revenue growing fast, Prime flywheel',risk:'Antitrust risk, AWS competition from Microsoft/Google',action:'WATCH'},
+  ];
+  if(!(state.techStocks&&state.techStocks.length)) state.techStocks=[
+    {ticker:'NVDA',curprice:'$880',sector:'AI / Semiconductors',fiveyr:'+85%/yr',growth:'+122% YoY',zone:'< $700',thesis:'AI GPU monopoly for data centers, CUDA ecosystem lock-in',risk:'China export ban, AMD/custom ASIC competition',action:'WAIT'},
+    {ticker:'AVGO',curprice:'$185',sector:'Semiconductors / AI',fiveyr:'+42%/yr',growth:'+51% YoY',zone:'< $160',thesis:'AI custom chip leader (Google, Meta), networking dominance',risk:'Customer concentration, VMware integration risk',action:'WATCH'},
+    {ticker:'AMD',curprice:'$95',sector:'Semiconductors',fiveyr:'+38%/yr',growth:'+18% YoY',zone:'< $85',thesis:'MI300X GPU challenger to NVDA, data center + PC CPU share gains',risk:'Still far behind NVDA in AI software ecosystem',action:'WATCH'},
+    {ticker:'META',curprice:'$512',sector:'Social / AI',fiveyr:'+30%/yr',growth:'+27% YoY',zone:'< $450',thesis:'AI-powered ad targeting + Llama open-source strategy',risk:'Regulatory antitrust risk, VR capex burn',action:'BUY'},
+    {ticker:'TSLA',curprice:'$175',sector:'EV / Robotics / Energy',fiveyr:'+32%/yr',growth:'+2% YoY',zone:'< $150',thesis:'FSD + Optimus robot optionality, energy storage growth',risk:'EV price war, Musk distraction, execution risk',action:'WAIT'},
+    {ticker:'PLTR',curprice:'$24',sector:'AI / Data / Defense',fiveyr:'+35%/yr',growth:'+29% YoY',zone:'< $20',thesis:'AIP platform gaining commercial traction, US govt moat',risk:'High valuation, reliance on govt contracts',action:'WATCH'},
+    {ticker:'ARM',curprice:'$105',sector:'Semiconductors / AI',fiveyr:'N/A (IPO 2023)',growth:'+23% YoY',zone:'< $90',thesis:'CPU architecture licensing dominates mobile, expanding into AI/data center',risk:'Customer concentration (Apple), RISC-V long-term threat',action:'WATCH'},
+    {ticker:'SMCI',curprice:'$42',sector:'AI Servers',fiveyr:'+60%/yr',growth:'+110% YoY',zone:'< $35',thesis:'AI server infrastructure supplier, direct NVDA GPU integrator',risk:'Accounting issues, DELL/HPE competition, volatile earnings',action:'WATCH'},
   ];
   if(!state.news.length) state.news=[
     {title:'Fed holds rates, signals 2 cuts in H2 2026 — dot plot unchanged',cat:'macro',date:'18 Apr'},
@@ -914,13 +1114,15 @@ function seedIfEmpty(){
 // ── INIT ──
 function init(){
   load(); seedIfEmpty(); setQuote();
-  renderTasks(); renderValueStocks(); renderGrowthStocks();
+  renderTasks(); renderValueStocks(); renderGrowthStocks(); renderTechStocks();
   renderCryptoCards(null); renderNews(); renderAllBiz(); renderDecisions(); renderReview();
   setupAutoSave(); loadApiKeys(); refreshOverview();
   setTimeout(fetchCryptoPrices, 500);
-  setTimeout(fetchFearGreed, 1000);
-  // Auto-refresh Fear & Greed every 30 minutes
-  setInterval(fetchFearGreed, 30*60*1000);
+  setTimeout(fetchCryptoFG, 1000);
+  // Auto-refresh crypto F&G every 30 min
+  setInterval(fetchCryptoFG, 30*60*1000);
+  // Restore CNN score if saved
+  if(state.lastCnnFg) applyCnnFgUI(state.lastCnnFg.score, state.lastCnnFg.ts+' (saved)');
 }
 
 init();
