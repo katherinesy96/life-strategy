@@ -222,6 +222,62 @@
   .alert-banner { display:none; position:fixed; top:68px; left:50%; transform:translateX(-50%); z-index:200; background:#2a0808; border:2px solid var(--red); border-radius:10px; padding:12px 24px; font-size:14px; font-weight:600; color:var(--red); box-shadow:0 4px 24px rgba(224,85,85,.3); text-align:center; max-width:520px; width:92%; }
   .alert-banner.show { display:block; }
   .alert-banner .cls { float:right; cursor:pointer; color:var(--text-muted); margin-left:12px; font-size:18px; line-height:1; }
+
+  /* ── RESEARCH DASHBOARD ── */
+  .research-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px; }
+  .research-title { font-size:15px; font-weight:700; color:var(--text); }
+  .research-subtitle { font-size:12px; color:var(--text-muted); margin-top:2px; }
+  .research-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:16px; margin-bottom:20px; }
+  .stock-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .stock-card-header { padding:14px 16px 10px; display:flex; align-items:flex-start; justify-content:space-between; border-bottom:1px solid var(--border); }
+  .stock-card-ticker { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--gold); }
+  .stock-card-name { font-size:11px; color:var(--text-muted); margin-top:2px; }
+  .stock-card-price { text-align:right; }
+  .stock-card-price .live-price { font-family:'JetBrains Mono',monospace; font-size:18px; font-weight:700; color:var(--text); }
+  .stock-card-price .live-chg { font-family:'JetBrains Mono',monospace; font-size:12px; padding:2px 7px; border-radius:4px; margin-top:3px; display:inline-block; }
+  .stock-card-body { padding:12px 16px; }
+  .sc-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); font-size:13px; }
+  .sc-row:last-child { border-bottom:none; }
+  .sc-label { color:var(--text-muted); font-size:12px; }
+  .sc-val { font-weight:600; font-family:'JetBrains Mono',monospace; font-size:13px; }
+  .sc-val.green { color:var(--green); }
+  .sc-val.red { color:var(--red); }
+  .sc-val.gold { color:var(--gold); }
+  .sc-val.blue { color:var(--blue); }
+  .stock-card-thesis { padding:10px 16px; background:var(--surface2); font-size:12px; color:var(--text-dim); line-height:1.5; border-top:1px solid var(--border); }
+  .stock-card-footer { padding:10px 16px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); }
+  .score-bar { display:flex; gap:4px; align-items:center; }
+  .score-pip { width:8px; height:8px; border-radius:2px; background:var(--border2); }
+  .score-pip.filled { background:var(--gold); }
+  .score-pip.filled.green { background:var(--green); }
+  .score-pip.filled.red { background:var(--red); }
+  .mos-bar { height:5px; border-radius:3px; background:var(--border); margin-top:4px; overflow:hidden; }
+  .mos-fill { height:100%; border-radius:3px; transition:width .5s; }
+  .action-big { padding:5px 14px; border-radius:6px; font-size:12px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; }
+  .action-strong-buy { background:#0e2418; color:var(--green); border:1px solid #1a4030; }
+  .action-buy { background:#0e2418; color:#7be0a8; border:1px solid #1a4030; }
+  .action-pullback { background:#2a1e0a; color:var(--gold); border:1px solid #3d2e10; }
+  .action-watch { background:#0e1a30; color:var(--blue); border:1px solid #1e2e50; }
+  .action-avoid { background:#2a1010; color:var(--red); border:1px solid #5a2020; }
+  .research-summary { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:20px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  @media(max-width:900px){ .summary-grid { grid-template-columns:1fr 1fr; } .research-grid { grid-template-columns:1fr; } }
+  .sum-card { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px; }
+  .sum-card-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:8px; }
+  .sum-item { display:flex; align-items:center; gap:6px; padding:4px 0; font-size:12px; color:var(--text-dim); border-bottom:1px solid var(--border); }
+  .sum-item:last-child { border-bottom:none; }
+  .sum-item .sticker { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--gold); font-size:13px; min-width:50px; }
+  .alloc-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .alloc-table th { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; color:var(--text-muted); text-align:left; padding:7px 10px; border-bottom:1px solid var(--border); }
+  .alloc-table td { padding:9px 10px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  .alloc-table tr:last-child td { border-bottom:none; }
+  .alloc-bar-wrap { background:var(--border); border-radius:4px; height:6px; width:100px; overflow:hidden; }
+  .alloc-bar-fill { height:100%; border-radius:4px; background:var(--gold); }
+  .refresh-row { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+  .last-updated { font-size:12px; color:var(--text-muted); }
+  .spinning { animation:spin .8s linear infinite; display:inline-block; }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
 </style>
 </head>
 <body>
@@ -245,9 +301,8 @@
   <div class="tab" onclick="switchTab('stocks')">Watchlist</div>
   <div class="tab" onclick="switchTab('crypto')">Crypto</div>
   <div class="tab" onclick="switchTab('news')">News</div>
-  <div class="tab" onclick="switchTab('biz')">Biz &amp; Tools</div>
   <div class="tab" onclick="switchTab('decision')">Decision Board</div>
-  <div class="tab" onclick="switchTab('review')">Weekly Review</div>
+  <div class="tab" onclick="switchTab('research')">📈 Research</div>
   <div class="tab" onclick="switchTab('api')">API Setup</div>
 </div>
 
@@ -328,37 +383,87 @@
   <!-- TASKS -->
   <div class="panel" id="panel-tasks">
     <div class="grid-2">
-      <div class="card">
-        <div class="card-title"><div class="dot"></div> Daily Tasks</div>
-        <div class="section-label">⭐ Top 3 Priorities</div>
-        <div id="tasks-top3"></div>
-        <div class="section-label">🔴 Urgent Follow-ups</div>
-        <div id="tasks-urgent"></div>
-        <div class="section-label">📋 General</div>
-        <div id="tasks-general"></div>
-        <div class="add-row" style="margin-top:12px;">
-          <input id="task-input" type="text" placeholder="Add a task…" style="flex:1;" onkeydown="if(event.key==='Enter')addTask()">
-          <select id="task-type">
-            <option value="top3">Priority</option>
-            <option value="urgent">Urgent</option>
-            <option value="general">General</option>
-            <option value="bottleneck">Bottleneck</option>
-            <option value="review">Review</option>
-          </select>
-          <button class="btn-gold" onclick="addTask()">Add</button>
+
+      <!-- LEFT: STOCK ACTION LIST -->
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-title"><div class="dot green"></div> 📈 Stock Actions Today</div>
+          <div class="section-label" style="margin-top:0">🟢 Buy Orders</div>
+          <div id="tasks-stock-buy"></div>
+          <div class="section-label">🔴 Sell Orders</div>
+          <div id="tasks-stock-sell"></div>
+          <div class="section-label">👁 Watch / Monitor</div>
+          <div id="tasks-stock-watch"></div>
+          <div class="section-label">⏳ Pending / Research</div>
+          <div id="tasks-stock-pending"></div>
+          <div class="add-row" style="margin-top:12px;">
+            <input id="stock-action-input" type="text" placeholder="e.g. Buy NVDA below $190 on dip" style="flex:1;" onkeydown="if(event.key==='Enter')addStockAction()">
+            <select id="stock-action-type">
+              <option value="stock-buy">Buy</option>
+              <option value="stock-sell">Sell</option>
+              <option value="stock-watch">Watch</option>
+              <option value="stock-pending">Pending</option>
+            </select>
+            <button class="btn-gold" onclick="addStockAction()">+ Add</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="dot purple"></div> ₿ Crypto Actions Today</div>
+          <div class="section-label" style="margin-top:0">🟢 Buy Orders</div>
+          <div id="tasks-crypto-buy"></div>
+          <div class="section-label">🔴 Sell / Take Profit</div>
+          <div id="tasks-crypto-sell"></div>
+          <div class="section-label">👁 Watch / Monitor</div>
+          <div id="tasks-crypto-watch"></div>
+          <div class="section-label">⚠️ Risk / Stop Loss</div>
+          <div id="tasks-crypto-risk"></div>
+          <div class="add-row" style="margin-top:12px;">
+            <input id="crypto-action-input" type="text" placeholder="e.g. Take profit BTC at $95k" style="flex:1;" onkeydown="if(event.key==='Enter')addCryptoAction()">
+            <select id="crypto-action-type">
+              <option value="crypto-buy">Buy</option>
+              <option value="crypto-sell">Sell / TP</option>
+              <option value="crypto-watch">Watch</option>
+              <option value="crypto-risk">Risk / SL</option>
+            </select>
+            <button class="btn-gold" onclick="addCryptoAction()">+ Add</button>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title"><div class="dot red"></div> Bottlenecks &amp; Pending</div>
-        <div id="tasks-bottleneck"></div>
-        <div class="section-label" style="margin-top:16px;">🔁 Weekly Review</div>
-        <div id="tasks-review"></div>
-        <div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border);">
-          <div style="font-size:13px;color:var(--text-dim);margin-bottom:6px;">Session progress</div>
-          <div class="progress-bar"><div class="progress-fill" id="week-progress" style="width:0%"></div></div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:6px;"><span id="done-count">0</span> done · <span id="pending-count">0</span> pending</div>
+
+      <!-- RIGHT: GENERAL + PROGRESS -->
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-title"><div class="dot"></div> 📋 Daily Priorities</div>
+          <div class="section-label" style="margin-top:0">⭐ Top 3 Today</div>
+          <div id="tasks-top3"></div>
+          <div class="section-label">🔴 Urgent Follow-ups</div>
+          <div id="tasks-urgent"></div>
+          <div class="section-label">📋 General</div>
+          <div id="tasks-general"></div>
+          <div class="add-row" style="margin-top:12px;">
+            <input id="task-input" type="text" placeholder="Add a task…" style="flex:1;" onkeydown="if(event.key==='Enter')addTask()">
+            <select id="task-type">
+              <option value="top3">Priority</option>
+              <option value="urgent">Urgent</option>
+              <option value="general">General</option>
+              <option value="bottleneck">Bottleneck</option>
+            </select>
+            <button class="btn-gold" onclick="addTask()">+ Add</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="dot red"></div> 🔒 Bottlenecks &amp; Pending Decisions</div>
+          <div id="tasks-bottleneck"></div>
+          <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
+            <div style="font-size:13px;color:var(--text-dim);margin-bottom:6px;">Today's progress</div>
+            <div class="progress-bar"><div class="progress-fill" id="week-progress" style="width:0%"></div></div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:6px;"><span id="done-count">0</span> done · <span id="pending-count">0</span> pending</div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -380,7 +485,7 @@
           <table class="stock-table">
             <thead><tr>
               <th>Ticker</th><th>Current Price</th><th>Quality / Moat</th><th>Fair Value</th>
-              <th>Buy Zone</th><th>MoS %</th><th>Thesis</th><th>Key Risk</th><th>Action</th><th></th>
+              <th>Buy Zone</th><th>MoS %</th><th>Rev YoY</th><th>Thesis</th><th>Key Risk</th><th>Action</th><th></th>
             </tr></thead>
             <tbody id="value-tbody"></tbody>
           </table>
@@ -392,6 +497,7 @@
           <input id="v-price" type="text" placeholder="Fair Value" style="max-width:100px;">
           <input id="v-zone" type="text" placeholder="Buy zone" style="max-width:90px;">
           <input id="v-mos" type="text" placeholder="MoS %" style="max-width:65px;">
+          <input id="v-yoy" type="text" placeholder="Rev YoY" style="max-width:80px;">
           <input id="v-thesis" type="text" placeholder="Thesis">
           <input id="v-risk" type="text" placeholder="Key risk">
           <select id="v-action"><option>BUY</option><option>WAIT</option><option>WATCH</option></select>
@@ -433,8 +539,8 @@
         <div style="overflow-x:auto;">
           <table class="stock-table">
             <thead><tr>
-              <th>Ticker</th><th>Current Price</th><th>Sector</th><th>5Y Avg Return</th>
-              <th>Rev Growth</th><th>Buy Zone</th><th>Why It Qualifies</th><th>Key Risk</th><th>Action</th><th></th>
+              <th>Ticker</th><th>Current Price</th><th>Sector</th><th>5Y Avg Ret</th>
+              <th>Rev YoY</th><th>Fair Value</th><th>Analyst Target</th><th>MoS %</th><th>Buy Zone</th><th>Why It Qualifies</th><th>Key Risk</th><th>Action</th><th></th>
             </tr></thead>
             <tbody id="tech-tbody"></tbody>
           </table>
@@ -444,8 +550,11 @@
           <input id="t-curprice" type="text" placeholder="Current $" style="max-width:85px;">
           <input id="t-sector" type="text" placeholder="Sector" style="max-width:110px;">
           <input id="t-5yr" type="text" placeholder="5Y Avg Ret" style="max-width:90px;">
-          <input id="t-growth" type="text" placeholder="Rev Growth" style="max-width:90px;">
-          <input id="t-zone" type="text" placeholder="Buy zone" style="max-width:90px;">
+          <input id="t-growth" type="text" placeholder="Rev YoY" style="max-width:85px;">
+          <input id="t-fairval" type="text" placeholder="Fair Value" style="max-width:85px;">
+          <input id="t-target" type="text" placeholder="Analyst Target" style="max-width:100px;">
+          <input id="t-mos" type="text" placeholder="MoS %" style="max-width:70px;">
+          <input id="t-zone" type="text" placeholder="Buy zone" style="max-width:85px;">
           <input id="t-thesis" type="text" placeholder="Why it qualifies">
           <input id="t-risk" type="text" placeholder="Key risk">
           <select id="t-action"><option>BUY</option><option>WAIT</option><option>WATCH</option></select>
@@ -495,54 +604,65 @@
 
   <!-- NEWS -->
   <div class="panel" id="panel-news">
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title"><div class="dot red"></div> Breaking / Investment News</div>
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Add headlines manually or connect NewsAPI in API Setup.</div>
-        <div id="news-list"></div>
-        <div class="add-row" style="margin-top:12px;">
-          <input id="news-inp" type="text" placeholder="Headline…" style="flex:1;" onkeydown="if(event.key==='Enter')addNews()">
-          <select id="news-cat">
-            <option value="macro">Macro / Fed</option>
-            <option value="geo">Geo / War</option>
-            <option value="earnings">Earnings</option>
-            <option value="crypto">Crypto / ETF</option>
-            <option value="signal">Signal</option>
-          </select>
-          <button class="btn-gold" onclick="addNews()">Add</button>
+
+    <!-- TOP ROW: Add news + filter -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div class="card-title" style="margin-bottom:0;"><div class="dot red"></div> Today's Top News — Stocks &amp; Crypto</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button onclick="filterNews('all')" id="nf-all" class="btn-gold" style="font-size:11px;padding:5px 12px;">All</button>
+          <button onclick="filterNews('stocks')" id="nf-stocks" class="btn-ghost" style="font-size:11px;padding:5px 12px;">📈 Stocks</button>
+          <button onclick="filterNews('crypto')" id="nf-crypto" class="btn-ghost" style="font-size:11px;padding:5px 12px;">₿ Crypto</button>
+          <button onclick="filterNews('macro')" id="nf-macro" class="btn-ghost" style="font-size:11px;padding:5px 12px;">🏛 Macro</button>
+          <button onclick="filterNews('earnings')" id="nf-earnings" class="btn-ghost" style="font-size:11px;padding:5px 12px;">💰 Earnings</button>
         </div>
       </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Keep max 10 headlines per day. Mark read to keep your list clean. Pinned items stay at top.</div>
+
+      <!-- ADD NEWS FORM -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);">
+        <input id="news-inp" type="text" placeholder="Paste or type headline…" style="flex:1;min-width:200px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;" onkeydown="if(event.key==='Enter')addNews()">
+        <input id="news-source" type="text" placeholder="Source (e.g. Bloomberg)" style="max-width:130px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;">
+        <input id="news-link" type="text" placeholder="URL (optional)" style="max-width:160px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;">
+        <select id="news-cat" style="background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 10px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;">
+          <option value="stocks">📈 Stocks</option>
+          <option value="crypto">₿ Crypto</option>
+          <option value="macro">🏛 Macro/Fed</option>
+          <option value="earnings">💰 Earnings</option>
+          <option value="geo">🌍 Geo/War</option>
+          <option value="signal">⚡ Signal</option>
+        </select>
+        <select id="news-impact" style="background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:8px 10px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;">
+          <option value="high">🔥 High Impact</option>
+          <option value="medium">📊 Medium</option>
+          <option value="low">📝 Low</option>
+        </select>
+        <button class="btn-gold" onclick="addNews()" style="padding:8px 16px;">+ Add</button>
+      </div>
+
+      <!-- NEWS LIST -->
+      <div id="news-list"></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:10px;" id="news-count">0 headlines today</div>
+    </div>
+
+    <!-- BOTTOM ROW: My Read + What to Do -->
+    <div class="grid-2">
       <div class="card">
-        <div class="card-title"><div class="dot blue"></div> My Analysis</div>
-        <textarea id="news-analysis" style="width:100%;min-height:260px;background:transparent;border:none;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;resize:vertical;outline:none;" placeholder="What does today's news mean for my portfolio?&#10;&#10;• Fed stance → my stocks?&#10;• Tariffs → my businesses?&#10;• Crypto regulation → positions?"></textarea>
+        <div class="card-title"><div class="dot blue"></div> 🧠 My Read on Today's News</div>
+        <textarea id="news-analysis" style="width:100%;min-height:180px;background:transparent;border:none;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;resize:vertical;outline:none;" placeholder="What does today's news mean for my portfolio?&#10;&#10;• Fed stance → my stocks?&#10;• Tariffs → my businesses?&#10;• Crypto regulation → positions?&#10;• Recession signals?"></textarea>
+      </div>
+      <div class="card">
+        <div class="card-title"><div class="dot green"></div> ⚡ What I Need To Do Based On News</div>
+        <div id="news-actions-list"></div>
+        <div class="add-row" style="margin-top:10px;">
+          <input id="news-action-inp" type="text" placeholder="e.g. Review NVDA position after earnings miss" style="flex:1;" onkeydown="if(event.key==='Enter')addNewsAction()">
+          <button class="btn-gold" onclick="addNewsAction()">+ Add</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- BIZ & TOOLS -->
-  <div class="panel" id="panel-biz">
-    <div class="grid-2">
-      <div class="card">
-        <div class="biz-label">💍 Wedding / Luxury Trends</div>
-        <div id="biz-wedding"></div>
-        <div class="add-row" style="margin-top:8px;"><input id="biz-wedding-inp" type="text" placeholder="Add update…" style="flex:1;" onkeydown="if(event.key==='Enter')addBiz('wedding')"><button class="btn-gold" onclick="addBiz('wedding')">Add</button></div>
-        <div class="biz-label" style="margin-top:18px;">🛒 Ecommerce / Ads Platform</div>
-        <div id="biz-ecom"></div>
-        <div class="add-row" style="margin-top:8px;"><input id="biz-ecom-inp" type="text" placeholder="Add update…" style="flex:1;" onkeydown="if(event.key==='Enter')addBiz('ecom')"><button class="btn-gold" onclick="addBiz('ecom')">Add</button></div>
-        <div class="biz-label" style="margin-top:18px;">🤖 AI Tools</div>
-        <div id="biz-ai"></div>
-        <div class="add-row" style="margin-top:8px;"><input id="biz-ai-inp" type="text" placeholder="Add update…" style="flex:1;" onkeydown="if(event.key==='Enter')addBiz('ai')"><button class="btn-gold" onclick="addBiz('ai')">Add</button></div>
-      </div>
-      <div class="card">
-        <div class="biz-label">⛓ Web3 / Stablecoin / Exchange</div>
-        <div id="biz-web3"></div>
-        <div class="add-row" style="margin-top:8px;"><input id="biz-web3-inp" type="text" placeholder="Add update…" style="flex:1;" onkeydown="if(event.key==='Enter')addBiz('web3')"><button class="btn-gold" onclick="addBiz('web3')">Add</button></div>
-        <div class="biz-label" style="margin-top:18px;">🎬 Creator Economy / Short Video</div>
-        <div id="biz-creator"></div>
-        <div class="add-row" style="margin-top:8px;"><input id="biz-creator-inp" type="text" placeholder="Add update…" style="flex:1;" onkeydown="if(event.key==='Enter')addBiz('creator')"><button class="btn-gold" onclick="addBiz('creator')">Add</button></div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- DECISION BOARD -->
   <div class="panel" id="panel-decision">
@@ -571,18 +691,7 @@
     </div>
   </div>
 
-  <!-- WEEKLY REVIEW -->
-  <div class="panel" id="panel-review">
-    <div class="review-grid">
-      <div class="rv-box"><div class="rv-box-title">🏆 What Went Well</div><textarea id="rv-wins" placeholder="Wins, momentum, things to repeat…"></textarea></div>
-      <div class="rv-box"><div class="rv-box-title">📉 What Didn't Work</div><textarea id="rv-miss" placeholder="Mistakes, losses, distractions…"></textarea></div>
-      <div class="rv-box"><div class="rv-box-title">🎯 Next Week's Focus</div><textarea id="rv-focus" placeholder="Top 3 priorities for next week…"></textarea></div>
-      <div class="rv-box"><div class="rv-box-title">💡 Key Lessons</div><textarea id="rv-lessons" placeholder="Insights, patterns, mental models…"></textarea></div>
-      <div class="rv-box"><div class="rv-box-title">💰 Financial Pulse</div><textarea id="rv-financial" placeholder="Revenue, expenses, investments, cash flow…"></textarea></div>
-      <div class="rv-box"><div class="rv-box-title">🔋 Energy &amp; Wellbeing</div><textarea id="rv-energy" placeholder="Health, sleep, relationships, balance…"></textarea></div>
-    </div>
-    <div style="text-align:center;margin-top:18px;"><button class="btn-gold" onclick="saveReview()" style="padding:10px 32px;">Save This Week's Review</button></div>
-  </div>
+
 
   <!-- API SETUP -->
   <div class="panel" id="panel-api">
@@ -602,13 +711,114 @@
     </div>
   </div>
 
+
+  <!-- RESEARCH DASHBOARD -->
+  <div class="panel" id="panel-research">
+    <div class="research-header">
+      <div>
+        <div class="research-title">📈 AI / Tech / Semi / EV — Elite Research Dashboard</div>
+        <div class="research-subtitle">Live prices auto-fetch on load · Analyst targets, fair values & thesis from April 2026 research · Click any field to edit</div>
+      </div>
+      <div class="refresh-row">
+        <span class="last-updated" id="research-updated">Prices: not loaded yet</span>
+        <button class="btn-gold" onclick="fetchResearchPrices()" style="font-size:12px;padding:7px 16px;">↺ Refresh Live Prices</button>
+      </div>
+    </div>
+
+    <!-- SUMMARY SECTION -->
+    <div class="research-summary">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:14px;">📊 Summary Rankings — April 2026</div>
+      <div class="summary-grid">
+        <div class="sum-card">
+          <div class="sum-card-title">🔥 Strong Buy Now</div>
+          <div class="sum-item"><span class="sticker">MSFT</span> Best quality + 24% MoS</div>
+          <div class="sum-item"><span class="sticker">META</span> Zero sell ratings, AI ads</div>
+          <div class="sum-item"><span class="sticker">AMD</span> 54% MoS, most undervalued</div>
+          <div class="sum-item"><span class="sticker">AMZN</span> AWS re-acceleration</div>
+          <div class="sum-item"><span class="sticker">NVDA</span> AI leader, 20% MoS</div>
+        </div>
+        <div class="sum-card">
+          <div class="sum-card-title">💰 Most Undervalued</div>
+          <div class="sum-item"><span class="sticker">AMD</span> $108 → FV $235 (+118%)</div>
+          <div class="sum-item"><span class="sticker">MSFT</span> $418 → FV $550 (+32%)</div>
+          <div class="sum-item"><span class="sticker">META</span> $627 → FV $800 (+28%)</div>
+          <div class="sum-item"><span class="sticker">NVDA</span> $201 → FV $250 (+24%)</div>
+          <div class="sum-item"><span class="sticker">AMZN</span> $251 → FV $295 (+18%)</div>
+        </div>
+        <div class="sum-card">
+          <div class="sum-card-title">🛡️ Safe Compounders</div>
+          <div class="sum-item"><span class="sticker">MSFT</span> Widest moat, AI distribution</div>
+          <div class="sum-item"><span class="sticker">AMZN</span> Triple engine business</div>
+          <div class="sum-item"><span class="sticker">TSM</span> Irreplaceable (geo risk)</div>
+          <div class="sum-item"><span class="sticker">GOOGL</span> Cheapest Mag7 multiple</div>
+        </div>
+        <div class="sum-card">
+          <div class="sum-card-title">🚀 Highest Upside</div>
+          <div class="sum-item"><span class="sticker">AMD</span> Could 3x if NVDA gap closes</div>
+          <div class="sum-item"><span class="sticker">META</span> $856+ target, AI ad runway</div>
+          <div class="sum-item"><span class="sticker">NVDA</span> $300+ if Rubin dominates</div>
+          <div class="sum-item"><span class="sticker">TSLA</span> Optimus wildcard (speculative)</div>
+        </div>
+        <div class="sum-card">
+          <div class="sum-card-title">🚨 Red Flags</div>
+          <div class="sum-item"><span class="sticker" style="color:var(--red)">MU</span> Peak-cycle multiples</div>
+          <div class="sum-item"><span class="sticker" style="color:var(--red)">TSLA</span> Negative MoS on fundamentals</div>
+          <div class="sum-item"><span class="sticker" style="color:var(--red)">ASML</span> P/E 49x, overvalued (InvestingPro)</div>
+          <div class="sum-item"><span class="sticker" style="color:var(--red)">AVGO</span> Only 8% MoS, limited cushion</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOCK CARDS GRID -->
+    <div class="research-grid" id="research-cards-grid">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- PORTFOLIO ALLOCATION -->
+    <div class="research-summary">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:14px;">💼 Best RM100,000 Portfolio Allocation</div>
+      <div class="grid-2">
+        <div style="overflow-x:auto;">
+          <table class="alloc-table">
+            <thead><tr><th>Stock</th><th>%</th><th>Amount</th><th>Weight</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td class="ticker">MSFT</td><td style="color:var(--gold);font-weight:700">20%</td><td style="font-family:'JetBrains Mono',monospace">RM20,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:100%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">Anchor — safest compounder</td></tr>
+              <tr><td class="ticker">META</td><td style="color:var(--gold);font-weight:700">18%</td><td style="font-family:'JetBrains Mono',monospace">RM18,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:90%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">AI ad engine, highest conviction</td></tr>
+              <tr><td class="ticker">AMD</td><td style="color:var(--gold);font-weight:700">15%</td><td style="font-family:'JetBrains Mono',monospace">RM15,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:75%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">Max upside, most undervalued</td></tr>
+              <tr><td class="ticker">NVDA</td><td style="color:var(--gold);font-weight:700">15%</td><td style="font-family:'JetBrains Mono',monospace">RM15,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:75%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">AI infrastructure leader</td></tr>
+              <tr><td class="ticker">AMZN</td><td style="color:var(--gold);font-weight:700">12%</td><td style="font-family:'JetBrains Mono',monospace">RM12,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:60%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">AWS + Ads flywheel</td></tr>
+              <tr><td class="ticker">TSM</td><td style="color:var(--gold);font-weight:700">10%</td><td style="font-family:'JetBrains Mono',monospace">RM10,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:50%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">Semiconductor backbone</td></tr>
+              <tr><td class="ticker">GOOGL</td><td style="color:var(--gold);font-weight:700">7%</td><td style="font-family:'JetBrains Mono',monospace">RM7,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:35%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">Cheap Mag7, defensive</td></tr>
+              <tr><td class="ticker">AVGO</td><td style="color:var(--gold);font-weight:700">3%</td><td style="font-family:'JetBrains Mono',monospace">RM3,000</td><td><div class="alloc-bar-wrap"><div class="alloc-bar-fill" style="width:15%"></div></div></td><td style="font-size:12px;color:var(--text-dim)">Custom AI chip exposure</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:12px;">📅 RM5,000/Month DCA Plan</div>
+          <div style="font-size:13px;color:var(--text-dim);line-height:1.8;">
+            <b style="color:var(--text)">Month 1–2:</b> MSFT + META — Both reporting Q1 April 29<br>
+            <b style="color:var(--text)">Month 3:</b> AMD — Most undervalued, add aggressively<br>
+            <b style="color:var(--text)">Month 4:</b> NVDA — If pullback below $190, add<br>
+            <b style="color:var(--text)">Month 5:</b> AMZN — AWS acceleration story (earnings April 30)<br>
+            <b style="color:var(--text)">Month 6:</b> TSM + GOOGL — Diversify<br>
+            <b style="color:var(--text)">Ongoing:</b> Add to whatever is most below fair value<br><br>
+            <div style="background:#2a1010;border:1px solid #5a2020;border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red);">
+              🚨 <b>CNN Fear &amp; Greed Rule:</b> If F&amp;G drops below 25, DOUBLE your monthly buy. That is the signal to be aggressive.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /main -->
 <div class="toast" id="toast">Saved ✓</div>
 
 <script>
 // ── STATE ──
 let state = {
-  tasks:[], valueStocks:[], growthStocks:[], techStocks:[], cryptoTargets:{},
+  tasks:[], stockActions:[], cryptoActions:[], newsActions:[],
+  valueStocks:[], growthStocks:[], techStocks:[], cryptoTargets:{},
   decisions:{buy:[],wait:[],delegate:[],ignore:[]},
   news:[], biz:{wedding:[],ecom:[],ai:[],web3:[],creator:[]},
   review:{}, cryptoNotes:'', newsAnalysis:'', apiKeys:{}, lastFg:null, lastCnnFg:null
@@ -641,7 +851,7 @@ function setQuote() {
 }
 
 // ── TABS ──
-const TABS=['overview','tasks','stocks','crypto','news','biz','decision','review','api'];
+const TABS=['overview','tasks','stocks','crypto','news','decision','research','api'];
 function switchTab(tab) {
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',TABS[i]===tab));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
@@ -651,17 +861,18 @@ function switchTab(tab) {
 
 // ── STOCK TABS ──
 function switchStockTab(type) {
-  document.querySelectorAll('.stock-tab').forEach((t,i)=>t.classList.toggle('active',(type==='value'&&i===0)||(type==='growth'&&i===1)));
-  document.getElementById('stock-value-panel').style.display=type==='value'?'':'none';
-  document.getElementById('stock-growth-panel').style.display=type==='growth'?'':'none';
+  document.querySelectorAll('.stock-tab').forEach((t,i)=>t.classList.toggle('active',(type==='value'&&i===0)||(type==='growth'&&i===1)||(type==='tech'&&i===2)));
+  document.getElementById('stock-value-panel').style.display=type==='value'?'block':'none';
+  document.getElementById('stock-growth-panel').style.display=type==='growth'?'block':'none';
+  document.getElementById('stock-tech-panel').style.display=type==='tech'?'block':'none';
 }
 
 // ── TASKS ──
-const TAG_CLS={top3:'tag-priority',urgent:'tag-urgent',bottleneck:'tag-blocked',review:'tag-review'};
-const TAG_LBL={top3:'Priority',urgent:'Urgent',bottleneck:'Blocked',review:'Review'};
+const TAG_CLS={top3:'tag-priority',urgent:'tag-urgent',bottleneck:'tag-blocked'};
+const TAG_LBL={top3:'Priority',urgent:'Urgent',bottleneck:'Blocked'};
 
 function renderTasks() {
-  ['top3','urgent','general','bottleneck','review'].forEach(type=>{
+  ['top3','urgent','general','bottleneck'].forEach(type=>{
     const el=document.getElementById('tasks-'+type); if(!el) return; el.innerHTML='';
     state.tasks.filter(t=>t.type===type).forEach(t=>{
       const idx=state.tasks.indexOf(t);
@@ -683,6 +894,74 @@ function addTask() {
 }
 function toggleTask(idx){ state.tasks[idx].done=!state.tasks[idx].done; save(); renderTasks(); refreshOverview(); }
 
+// ── STOCK & CRYPTO ACTIONS ──
+const ACTION_TAG = {
+  'stock-buy':  {label:'BUY',  cls:'act-buy'},
+  'stock-sell': {label:'SELL', cls:'act-badge', style:'background:#2a1010;color:var(--red);border:1px solid #5a2020;'},
+  'stock-watch':{label:'WATCH',cls:'act-watch'},
+  'stock-pending':{label:'PENDING',cls:'act-wait'},
+  'crypto-buy': {label:'BUY',  cls:'act-buy'},
+  'crypto-sell':{label:'SELL/TP',cls:'act-badge',style:'background:#2a1010;color:var(--red);border:1px solid #5a2020;'},
+  'crypto-watch':{label:'WATCH',cls:'act-watch'},
+  'crypto-risk':{label:'RISK/SL',cls:'act-badge',style:'background:#2a1a30;color:var(--purple);border:1px solid #4a2a60;'},
+};
+
+function renderStockActions(){
+  ['stock-buy','stock-sell','stock-watch','stock-pending'].forEach(type=>{
+    const el=document.getElementById('tasks-'+type); if(!el) return; el.innerHTML='';
+    (state.stockActions||[]).filter(a=>a.type===type).forEach((a,globalIdx)=>{
+      const idx=(state.stockActions||[]).indexOf(a);
+      const tag=ACTION_TAG[type];
+      const styleStr=tag.style?`style="${tag.style}"`:'';
+      el.innerHTML+=`<div class="task-item${a.done?' done':''}" onclick="toggleStockAction(${idx})">
+        <div class="task-cb">${a.done?'✓':''}</div>
+        <div class="task-text">${a.text}</div>
+        <span class="act-badge ${tag.cls}" ${styleStr}>${tag.label}</span>
+        <span onclick="event.stopPropagation();removeStockAction(${idx})" style="color:var(--text-muted);cursor:pointer;font-size:16px;margin-left:4px;">×</span>
+      </div>`;
+    });
+  });
+}
+
+function renderCryptoActions(){
+  ['crypto-buy','crypto-sell','crypto-watch','crypto-risk'].forEach(type=>{
+    const el=document.getElementById('tasks-'+type); if(!el) return; el.innerHTML='';
+    (state.cryptoActions||[]).filter(a=>a.type===type).forEach((a,globalIdx)=>{
+      const idx=(state.cryptoActions||[]).indexOf(a);
+      const tag=ACTION_TAG[type];
+      const styleStr=tag.style?`style="${tag.style}"`:'';
+      el.innerHTML+=`<div class="task-item${a.done?' done':''}" onclick="toggleCryptoAction(${idx})">
+        <div class="task-cb">${a.done?'✓':''}</div>
+        <div class="task-text">${a.text}</div>
+        <span class="act-badge ${tag.cls}" ${styleStr}>${tag.label}</span>
+        <span onclick="event.stopPropagation();removeCryptoAction(${idx})" style="color:var(--text-muted);cursor:pointer;font-size:16px;margin-left:4px;">×</span>
+      </div>`;
+    });
+  });
+}
+
+function addStockAction(){
+  const inp=document.getElementById('stock-action-input');
+  const type=document.getElementById('stock-action-type').value;
+  const text=inp.value.trim(); if(!text) return;
+  if(!state.stockActions) state.stockActions=[];
+  state.stockActions.push({text,type,done:false});
+  inp.value=''; save(); renderStockActions();
+}
+function toggleStockAction(idx){ state.stockActions[idx].done=!state.stockActions[idx].done; save(); renderStockActions(); }
+function removeStockAction(idx){ state.stockActions.splice(idx,1); save(); renderStockActions(); }
+
+function addCryptoAction(){
+  const inp=document.getElementById('crypto-action-input');
+  const type=document.getElementById('crypto-action-type').value;
+  const text=inp.value.trim(); if(!text) return;
+  if(!state.cryptoActions) state.cryptoActions=[];
+  state.cryptoActions.push({text,type,done:false});
+  inp.value=''; save(); renderCryptoActions();
+}
+function toggleCryptoAction(idx){ state.cryptoActions[idx].done=!state.cryptoActions[idx].done; save(); renderCryptoActions(); }
+function removeCryptoAction(idx){ state.cryptoActions.splice(idx,1); save(); renderCryptoActions(); }
+
 // ── STOCKS ──
 function mosClass(m){ const n=parseInt(m)||0; return n>=20?'mos-high':n>=10?'mos-mid':'mos-low'; }
 function actClass(a){ return a==='BUY'?'act-buy':a==='WAIT'?'act-wait':'act-watch'; }
@@ -691,6 +970,8 @@ function renderValueStocks(){
   const tb=document.getElementById('value-tbody'); if(!tb) return; tb.innerHTML='';
   state.valueStocks.forEach((s,i)=>{
     const cp=s.curprice||'—';
+    const yoy=s.yoy||'—';
+    const yoyColor=yoy.includes('-')?'var(--red)':'var(--green)';
     tb.innerHTML+=`<tr>
       <td class="ticker">${s.ticker}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--text)">${cp}</td>
@@ -698,8 +979,9 @@ function renderValueStocks(){
       <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim)">${s.price}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold)">${s.zone}</td>
       <td><span class="mos-badge ${mosClass(s.mos)}">${s.mos}</span></td>
-      <td style="font-size:12px;color:var(--text-dim);max-width:160px">${s.thesis}</td>
-      <td style="font-size:12px;color:var(--red);max-width:130px">${s.risk}</td>
+      <td style="font-size:13px;font-weight:600;color:${yoyColor}">${yoy}</td>
+      <td style="font-size:12px;color:var(--text-dim);max-width:150px">${s.thesis}</td>
+      <td style="font-size:12px;color:var(--red);max-width:120px">${s.risk}</td>
       <td><span class="act-badge ${actClass(s.action)}">${s.action}</span></td>
       <td><span class="del-btn" onclick="removeStock('value',${i})">×</span></td>
     </tr>`;
@@ -727,8 +1009,8 @@ function renderGrowthStocks(){
 function addStock(type){
   if(type==='value'){
     const t=document.getElementById('v-ticker').value.trim().toUpperCase(); if(!t) return;
-    state.valueStocks.push({ticker:t,curprice:document.getElementById('v-curprice').value,quality:document.getElementById('v-quality').value,price:document.getElementById('v-price').value,zone:document.getElementById('v-zone').value,mos:document.getElementById('v-mos').value,thesis:document.getElementById('v-thesis').value,risk:document.getElementById('v-risk').value,action:document.getElementById('v-action').value});
-    ['v-ticker','v-curprice','v-quality','v-price','v-zone','v-mos','v-thesis','v-risk'].forEach(id=>document.getElementById(id).value='');
+    state.valueStocks.push({ticker:t,curprice:document.getElementById('v-curprice').value,quality:document.getElementById('v-quality').value,price:document.getElementById('v-price').value,zone:document.getElementById('v-zone').value,mos:document.getElementById('v-mos').value,yoy:document.getElementById('v-yoy').value,thesis:document.getElementById('v-thesis').value,risk:document.getElementById('v-risk').value,action:document.getElementById('v-action').value});
+    ['v-ticker','v-curprice','v-quality','v-price','v-zone','v-mos','v-yoy','v-thesis','v-risk'].forEach(id=>document.getElementById(id).value='');
     save(); renderValueStocks(); refreshOverview(); showToast('Value stock added ✓');
   } else if(type==='growth'){
     const t=document.getElementById('g-ticker').value.trim().toUpperCase(); if(!t) return;
@@ -737,8 +1019,8 @@ function addStock(type){
     save(); renderGrowthStocks(); refreshOverview(); showToast('Growth stock added ✓');
   } else {
     const t=document.getElementById('t-ticker').value.trim().toUpperCase(); if(!t) return;
-    state.techStocks.push({ticker:t,curprice:document.getElementById('t-curprice').value,sector:document.getElementById('t-sector').value,fiveyr:document.getElementById('t-5yr').value,growth:document.getElementById('t-growth').value,zone:document.getElementById('t-zone').value,thesis:document.getElementById('t-thesis').value,risk:document.getElementById('t-risk').value,action:document.getElementById('t-action').value});
-    ['t-ticker','t-curprice','t-sector','t-5yr','t-growth','t-zone','t-thesis','t-risk'].forEach(id=>document.getElementById(id).value='');
+    state.techStocks.push({ticker:t,curprice:document.getElementById('t-curprice').value,sector:document.getElementById('t-sector').value,fiveyr:document.getElementById('t-5yr').value,growth:document.getElementById('t-growth').value,fairval:document.getElementById('t-fairval').value,target:document.getElementById('t-target').value,mos:document.getElementById('t-mos').value,zone:document.getElementById('t-zone').value,thesis:document.getElementById('t-thesis').value,risk:document.getElementById('t-risk').value,action:document.getElementById('t-action').value});
+    ['t-ticker','t-curprice','t-sector','t-5yr','t-growth','t-fairval','t-target','t-mos','t-zone','t-thesis','t-risk'].forEach(id=>document.getElementById(id).value='');
     save(); renderTechStocks(); refreshOverview(); showToast('Tech stock added ✓');
   }
 }
@@ -755,15 +1037,24 @@ function renderTechStocks(){
     const cp=s.curprice||'—';
     const fyr=s.fiveyr||'—';
     const isHigh=parseFloat(fyr)>=30;
+    const fv=s.fairval||'—';
+    const tgt=s.target||'—';
+    const mos=s.mos||'—';
+    const mosNum=parseFloat(mos)||0;
+    const mosColor=mosNum>=20?'var(--green)':mosNum>=5?'var(--gold)':mosNum<0?'var(--red)':'var(--orange)';
+    const yoyColor=s.growth&&s.growth.includes('-')?'var(--red)':'var(--green)';
     tb.innerHTML+=`<tr>
       <td class="ticker">${s.ticker}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--text)">${cp}</td>
       <td style="font-size:13px;color:var(--text-dim)">${s.sector}</td>
       <td style="font-size:13px;font-weight:700;color:${isHigh?'var(--green)':'var(--orange)'}">${fyr}</td>
-      <td style="font-size:13px;color:var(--green);font-weight:600">${s.growth||'—'}</td>
+      <td style="font-size:13px;color:${yoyColor};font-weight:600">${s.growth||'—'}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim)">${fv}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--blue)">${tgt}</td>
+      <td><span class="mos-badge ${mosNum>=20?'mos-high':mosNum>=5?'mos-mid':'mos-low'}">${mos}</span></td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold)">${s.zone||'—'}</td>
-      <td style="font-size:12px;color:var(--text-dim);max-width:160px">${s.thesis}</td>
-      <td style="font-size:12px;color:var(--red);max-width:130px">${s.risk}</td>
+      <td style="font-size:12px;color:var(--text-dim);max-width:140px">${s.thesis}</td>
+      <td style="font-size:12px;color:var(--red);max-width:120px">${s.risk}</td>
       <td><span class="act-badge ${actClass(s.action)}">${s.action}</span></td>
       <td><span class="del-btn" onclick="removeStock('tech',${i})">×</span></td>
     </tr>`;
@@ -944,24 +1235,408 @@ async function fetchCryptoPrices(){
   }
 }
 
+
+// ══════════════════════════════════════════════════
+// RESEARCH DASHBOARD
+// ══════════════════════════════════════════════════
+
+const RESEARCH_STOCKS = [
+  {
+    ticker:'NVDA', name:'NVIDIA Corporation', sector:'AI / Semiconductors',
+    fairValue:250, analystTarget:266, buyZone:'< $190',
+    mos:20, score:43, action:'buy-pullback', actionLabel:'Buy on Pullback',
+    thesis:'AI GPU monopoly via CUDA ecosystem lock-in. FY2026 revenue +65% to $216B. Blackwell architecture leads competition by 2+ generations. Rubin cycle extends pricing power to 2028.',
+    risk:'China export restrictions. AMD/custom ASIC competition. Hyper-scaler capex slowdown.',
+    revenue5y:'+85%/yr avg', grossMargin:'75%', roe:'115%+', debtLevel:'Low (net cash)',
+    moat:9, growth:10, valuation:7, management:9, riskReward:8,
+    upcomingCatalyst:'Q1 FY2027 earnings (May 2026)',
+    coingeckoId: null, yahooTicker:'NVDA'
+  },
+  {
+    ticker:'MSFT', name:'Microsoft Corporation', sector:'Cloud / AI / Productivity',
+    fairValue:550, analystTarget:580, buyZone:'< $400',
+    mos:24, score:44, action:'strong-buy', actionLabel:'Strong Buy Now',
+    thesis:'Only company with AI across cloud, productivity, gaming & search simultaneously. Azure +39% YoY. Microsoft 365 Copilot at $30/user is highest-margin AI product ever. Q3 FY2026 earnings April 29.',
+    risk:'OpenAI dependency. Azure losing share to AWS. $37.5B quarterly capex must generate returns.',
+    revenue5y:'+15%/yr avg', grossMargin:'70%', roe:'38%', debtLevel:'Moderate (investment grade)',
+    moat:10, growth:8, valuation:8, management:9, riskReward:9,
+    upcomingCatalyst:'Q3 FY2026 Earnings — April 29, 2026',
+    yahooTicker:'MSFT'
+  },
+  {
+    ticker:'META', name:'Meta Platforms', sector:'Social Media / AI Advertising',
+    fairValue:800, analystTarget:856, buyZone:'< $580',
+    mos:22, score:42, action:'strong-buy', actionLabel:'Strong Buy Now',
+    thesis:'3.58B daily users. AI ad targeting (Advantage+) at $60B annual run rate. 78 analysts, zero sell ratings. Forward P/E ~19x — cheap for 20%+ EPS growth. Q1 earnings April 29.',
+    risk:'Reality Labs losing $19B/yr. 2026 capex $115–135B unproven ROI. EU antitrust on WhatsApp.',
+    revenue5y:'+18%/yr avg', grossMargin:'82%', roe:'35%', debtLevel:'Low (net cash)',
+    moat:9, growth:9, valuation:8, management:8, riskReward:8,
+    upcomingCatalyst:'Q1 2026 Earnings — April 29, 2026',
+    yahooTicker:'META'
+  },
+  {
+    ticker:'AMD', name:'Advanced Micro Devices', sector:'Semiconductors / AI',
+    fairValue:235, analystTarget:265, buyZone:'< $95',
+    mos:54, score:41, action:'strong-buy', actionLabel:'Strong Buy Now',
+    thesis:'Only credible NVIDIA challenger for AI GPUs. EPYC CPU gaining data center share structurally. Bernstein raised target to $265 April 16. Hyperscalers need a second supplier — AMD is it.',
+    risk:'ROCm software ecosystem vastly inferior to CUDA. Gaming division declining. Cyclical semi exposure.',
+    revenue5y:'+25%/yr avg', grossMargin:'50%', roe:'3%', debtLevel:'Low-moderate',
+    moat:7, growth:8, valuation:9, management:8, riskReward:9,
+    upcomingCatalyst:'Q1 2026 Earnings (late April 2026)',
+    yahooTicker:'AMD'
+  },
+  {
+    ticker:'AVGO', name:'Broadcom Inc.', sector:'Semiconductors / Infrastructure Software',
+    fairValue:430, analystTarget:456, buyZone:'< $360',
+    mos:8, score:38, action:'buy-pullback', actionLabel:'Buy on Pullback',
+    thesis:'Custom AI chip king — Meta deploying 1GW+ of AVGO MTIA chips. Google, Apple also customers. VMware adds high-margin recurring software. Morgan Stanley top pick alongside NVDA.',
+    risk:'Customer concentration. VMware integration risk. Stretched valuation at current price.',
+    revenue5y:'+23%/yr avg', grossMargin:'67%', roe:'65%', debtLevel:'High (VMware acquisition)',
+    moat:9, growth:8, valuation:6, management:8, riskReward:7,
+    upcomingCatalyst:'Q2 FY2026 Earnings (June 2026)',
+    yahooTicker:'AVGO'
+  },
+  {
+    ticker:'TSM', name:'Taiwan Semiconductor (TSMC)', sector:'Semiconductor Manufacturing',
+    fairValue:420, analystTarget:458, buyZone:'< $340',
+    mos:13, score:42, action:'buy-pullback', actionLabel:'Buy on Pullback',
+    thesis:'Irreplaceable monopoly on 3nm/2nm chip manufacturing. Q1 2026 revenue +35%, net income +51% YoY. 2026 guidance raised to 30%+ USD growth. Every AI chip runs through TSMC.',
+    risk:'Taiwan geopolitical risk — single biggest binary risk in global markets.',
+    revenue5y:'+20%/yr avg', grossMargin:'58%', roe:'28%', debtLevel:'Low-moderate',
+    moat:10, growth:9, valuation:7, management:9, riskReward:7,
+    upcomingCatalyst:'Q2 2026 Earnings (July 2026)',
+    yahooTicker:'TSM'
+  },
+  {
+    ticker:'GOOGL', name:'Alphabet Inc.', sector:'Search / Cloud / AI',
+    fairValue:340, analystTarget:355, buyZone:'< $290',
+    mos:1, score:37, action:'watchlist', actionLabel:'Watchlist / Pullback',
+    thesis:'Cheapest Mag7 on forward P/E. Google Cloud +28% growth. Gemini AI across Search + Workspace. $70B/yr buyback compressing share count. Q1 2026 earnings April 29.',
+    risk:'AI search disruption from ChatGPT/Perplexity. DOJ antitrust on search monopoly.',
+    revenue5y:'+14%/yr avg', grossMargin:'58%', roe:'31%', debtLevel:'Low (net cash)',
+    moat:9, growth:7, valuation:7, management:7, riskReward:7,
+    upcomingCatalyst:'Q1 2026 Earnings — April 29, 2026',
+    yahooTicker:'GOOGL'
+  },
+  {
+    ticker:'AMZN', name:'Amazon.com', sector:'Cloud / E-Commerce / Advertising',
+    fairValue:295, analystTarget:287, buyZone:'< $230',
+    mos:15, score:40, action:'buy', actionLabel:'Buy Now',
+    thesis:'AWS $35.6B/qtr +24% YoY (fastest since AI boom). Advertising $21.3B/qtr +23% YoY. Sum-of-parts: $275–340/share. 72 analysts Strong Buy consensus. Q1 earnings April 30.',
+    risk:'Tariff impact on retail margins. Massive capex commitments on AWS ROI. Azure competition.',
+    revenue5y:'+12%/yr avg', grossMargin:'49%', roe:'25%', debtLevel:'Low-moderate',
+    moat:9, growth:8, valuation:7, management:8, riskReward:8,
+    upcomingCatalyst:'Q1 2026 Earnings — April 30, 2026',
+    yahooTicker:'AMZN'
+  },
+  {
+    ticker:'ASML', name:'ASML Holding NV', sector:'Semiconductor Equipment',
+    fairValue:730, analystTarget:850, buyZone:'< $620',
+    mos:4, score:38, action:'watchlist', actionLabel:'Watchlist / Pullback',
+    thesis:'Only maker of EUV lithography machines. Without ASML, no one makes advanced chips. 2026 revenue guidance raised €36–40B. Goldman Sachs target €1,570. High NA EUV is next upgrade cycle.',
+    risk:'P/E 49x — overvalued (InvestingPro). China export restrictions. Q2 guidance slightly below consensus.',
+    revenue5y:'+22%/yr avg', grossMargin:'51–53%', roe:'52%', debtLevel:'Low',
+    moat:10, growth:8, valuation:5, management:9, riskReward:6,
+    upcomingCatalyst:'Q2 2026 Earnings (July 2026)',
+    yahooTicker:'ASML'
+  },
+  {
+    ticker:'TSLA', name:'Tesla Inc.', sector:'EV / Robotics / Energy',
+    fairValue:280, analystTarget:397, buyZone:'< $180',
+    mos:-19, score:25, action:'avoid', actionLabel:'Watchlist Only',
+    thesis:'FSD + Optimus robot optionality story. Energy storage growing. Q1 2026 earnings April 22. If robotaxi/Optimus succeeds, the TAM is unlimited. Speculative premium only.',
+    risk:'Core EV margin compression. BYD price war. Musk brand damage. FSD timelines missed for 5 years. Negative MoS on fundamentals.',
+    revenue5y:'+25%/yr avg', grossMargin:'18%', roe:'13%', debtLevel:'Low',
+    moat:6, growth:5, valuation:4, management:5, riskReward:5,
+    upcomingCatalyst:'Q1 2026 Earnings — April 22, 2026',
+    yahooTicker:'TSLA'
+  },
+  {
+    ticker:'MU', name:'Micron Technology', sector:'Memory Semiconductors',
+    fairValue:150, analystTarget:145, buyZone:'< $100',
+    mos:-66, score:31, action:'avoid', actionLabel:'Hold / Wait for Pullback',
+    thesis:'HBM3E in every NVDA Blackwell GPU. DRAM oligopoly (3 suppliers only). AI servers need 3–5x more memory. Enormous earnings leverage when cycle turns up.',
+    risk:'Highly cyclical — trading at peak-cycle multiples. If AI capex slows 20%, could fall 40–50%. China revenue ~10% at risk.',
+    revenue5y:'+12%/yr avg', grossMargin:'38%', roe:'21%', debtLevel:'Moderate',
+    moat:7, growth:8, valuation:4, management:7, riskReward:5,
+    upcomingCatalyst:'Q3 FY2026 Earnings (June 2026)',
+    yahooTicker:'MU'
+  }
+];
+
+// Live prices cache
+let researchPrices = {};
+
+function getActionClass(action){
+  const map = {'strong-buy':'action-strong-buy','buy':'action-buy','buy-pullback':'action-pullback','watchlist':'action-watch','avoid':'action-avoid'};
+  return map[action] || 'action-watch';
+}
+
+function getMosColor(mos){
+  if(mos >= 20) return 'var(--green)';
+  if(mos >= 10) return 'var(--gold)';
+  if(mos >= 0)  return 'var(--orange)';
+  return 'var(--red)';
+}
+
+function renderScorePips(score, max=50){
+  const filled = Math.round(score/max * 10);
+  const color = filled >= 8 ? 'green' : filled >= 6 ? '' : 'red';
+  return Array.from({length:10},(_,i)=>`<div class="score-pip ${i<filled?'filled '+color:''}"></div>`).join('');
+}
+
+function renderResearchCards(){
+  const grid = document.getElementById('research-cards-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  RESEARCH_STOCKS.forEach(s => {
+    const liveData = researchPrices[s.ticker];
+    const livePrice = liveData ? '$'+Number(liveData.price).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}) : '<span class="loading-pulse">Fetching…</span>';
+    const chg = liveData ? liveData.change : null;
+    const chgHtml = chg !== null
+      ? `<span class="live-chg ${chg>=0?'chg-pos':'chg-neg'}">${chg>=0?'+':''}${chg.toFixed(2)}%</span>`
+      : '<span style="color:var(--text-muted);font-size:11px;">—</span>';
+
+    // Calculate live MoS if we have price
+    let displayMos = s.mos;
+    let displayMosColor = getMosColor(s.mos);
+    if(liveData && liveData.price){
+      displayMos = Math.round((s.fairValue - liveData.price) / liveData.price * 100);
+      displayMosColor = getMosColor(displayMos);
+    }
+    const mosBarW = Math.max(0, Math.min(100, displayMos));
+
+    const card = `<div class="stock-card">
+      <div class="stock-card-header">
+        <div>
+          <div class="stock-card-ticker">${s.ticker}</div>
+          <div class="stock-card-name">${s.name}</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">${s.sector}</div>
+        </div>
+        <div class="stock-card-price">
+          <div class="live-price" id="rp-price-${s.ticker}">${livePrice}</div>
+          <div>${chgHtml}</div>
+          <div style="margin-top:6px;"><span class="action-big ${getActionClass(s.action)}">${s.actionLabel}</span></div>
+        </div>
+      </div>
+      <div class="stock-card-body">
+        <div class="sc-row">
+          <span class="sc-label">Fair Value</span>
+          <span class="sc-val gold">$${s.fairValue}</span>
+        </div>
+        <div class="sc-row">
+          <span class="sc-label">Analyst Target</span>
+          <span class="sc-val blue">$${s.analystTarget}</span>
+        </div>
+        <div class="sc-row">
+          <span class="sc-label">Margin of Safety</span>
+          <div style="text-align:right;">
+            <span class="sc-val" id="rp-mos-${s.ticker}" style="color:${displayMosColor}">${displayMos > 0 ? '+' : ''}${displayMos}%</span>
+            <div class="mos-bar" style="margin-top:3px;"><div class="mos-fill" id="rp-mosbar-${s.ticker}" style="width:${mosBarW}%;background:${displayMosColor}"></div></div>
+          </div>
+        </div>
+        <div class="sc-row">
+          <span class="sc-label">Buy Zone</span>
+          <span class="sc-val gold">${s.buyZone}</span>
+        </div>
+        <div class="sc-row">
+          <span class="sc-label">5Y Rev Growth</span>
+          <span class="sc-val green">${s.revenue5y}</span>
+        </div>
+        <div class="sc-row">
+          <span class="sc-label">Gross Margin</span>
+          <span class="sc-val">${s.grossMargin}</span>
+        </div>
+        <div class="sc-row">
+          <span class="sc-label">ROE</span>
+          <span class="sc-val">${s.roe}</span>
+        </div>
+        <div class="sc-row" style="border-bottom:none;">
+          <span class="sc-label">Next Catalyst</span>
+          <span style="font-size:11px;color:var(--blue);text-align:right;max-width:180px;">${s.upcomingCatalyst}</span>
+        </div>
+      </div>
+      <div style="padding:8px 16px;border-top:1px solid var(--border);background:var(--surface2);">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:4px;">Scorecard /50</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="score-bar">${renderScorePips(s.score)}</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--gold);font-size:14px;">${s.score}/50</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px;font-size:10px;color:var(--text-muted);text-align:center;">
+          <div>Moat<br><b style="color:var(--text);font-size:12px;">${s.moat}</b></div>
+          <div>Growth<br><b style="color:var(--text);font-size:12px;">${s.growth}</b></div>
+          <div>Value<br><b style="color:var(--text);font-size:12px;">${s.valuation}</b></div>
+          <div>Mgmt<br><b style="color:var(--text);font-size:12px;">${s.management}</b></div>
+          <div>R/R<br><b style="color:var(--text);font-size:12px;">${s.riskReward}</b></div>
+        </div>
+      </div>
+      <div class="stock-card-thesis">
+        <b style="color:var(--text)">Thesis:</b> ${s.thesis}<br><br>
+        <b style="color:var(--red)">Risk:</b> ${s.risk}
+      </div>
+    </div>`;
+    grid.innerHTML += card;
+  });
+}
+
+async function fetchResearchPrices(){
+  const updEl = document.getElementById('research-updated');
+  if(updEl) updEl.innerHTML = '<span class="spinning">↺</span> Fetching live prices…';
+
+  // Use Yahoo Finance via a public CORS proxy
+  const tickers = RESEARCH_STOCKS.map(s=>s.yahooTicker).join(',');
+  const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${tickers}&fields=regularMarketPrice,regularMarketChangePercent`;
+
+  try {
+    // Try direct Yahoo (works in some browsers)
+    const res = await fetch(url, {headers:{'Accept':'application/json'}});
+    if(!res.ok) throw new Error('Yahoo direct failed');
+    const data = await res.json();
+    const quotes = data?.quoteResponse?.result || [];
+    quotes.forEach(q => {
+      researchPrices[q.symbol] = {
+        price: q.regularMarketPrice,
+        change: q.regularMarketChangePercent
+      };
+    });
+    updateResearchPriceDisplays();
+    if(updEl) updEl.textContent = 'Prices: ' + new Date().toLocaleString('en-MY',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) + ' (Yahoo Finance)';
+  } catch(e) {
+    // Fallback: try cors-anywhere or allorigins proxy
+    try {
+      const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+      const res2 = await fetch(proxyUrl);
+      const wrapper = await res2.json();
+      const data2 = JSON.parse(wrapper.contents);
+      const quotes2 = data2?.quoteResponse?.result || [];
+      quotes2.forEach(q => {
+        researchPrices[q.symbol] = {
+          price: q.regularMarketPrice,
+          change: q.regularMarketChangePercent
+        };
+      });
+      updateResearchPriceDisplays();
+      if(updEl) updEl.textContent = 'Prices: ' + new Date().toLocaleString('en-MY',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}) + ' (via proxy)';
+    } catch(e2) {
+      if(updEl) updEl.innerHTML = '⚠️ Price fetch failed — CORS blocked. <a href="https://finance.yahoo.com" target="_blank" style="color:var(--gold)">Update manually on Yahoo →</a>';
+    }
+  }
+}
+
+function updateResearchPriceDisplays(){
+  RESEARCH_STOCKS.forEach(s => {
+    const liveData = researchPrices[s.ticker];
+    if(!liveData) return;
+
+    const priceEl = document.getElementById('rp-price-'+s.ticker);
+    if(priceEl) priceEl.textContent = '$'+Number(liveData.price).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+
+    // Recalculate MoS with live price
+    const liveMos = Math.round((s.fairValue - liveData.price) / liveData.price * 100);
+    const mosColor = getMosColor(liveMos);
+    const mosEl = document.getElementById('rp-mos-'+s.ticker);
+    if(mosEl){ mosEl.textContent = (liveMos>0?'+':'')+liveMos+'%'; mosEl.style.color = mosColor; }
+    const mosBarEl = document.getElementById('rp-mosbar-'+s.ticker);
+    if(mosBarEl){ mosBarEl.style.width = Math.max(0,Math.min(100,liveMos))+'%'; mosBarEl.style.background = mosColor; }
+  });
+}
+
+
 // ── NEWS ──
-const CAT_CLS={macro:'cat-macro',geo:'cat-geo',earnings:'cat-earnings',crypto:'cat-crypto',signal:'cat-signal'};
-const CAT_LBL={macro:'Macro/Fed',geo:'Geo/War',earnings:'Earnings',crypto:'Crypto/ETF',signal:'Signal'};
+const CAT_CLS={stocks:'cat-macro',crypto:'cat-crypto',macro:'cat-signal',earnings:'cat-earnings',geo:'cat-geo',signal:'cat-signal'};
+const CAT_LBL={stocks:'📈 Stocks',crypto:'₿ Crypto',macro:'🏛 Macro',earnings:'💰 Earnings',geo:'🌍 Geo',signal:'⚡ Signal'};
+const IMPACT_STYLE={
+  high:'background:#2a0808;color:var(--red);border:1px solid #5a1010;',
+  medium:'background:#2a1e0a;color:var(--gold);border:1px solid #3d2e10;',
+  low:'background:#1a1e2a;color:var(--text-muted);border:1px solid var(--border2);'
+};
+const IMPACT_LBL={high:'🔥 HIGH',medium:'📊 MED',low:'📝 LOW'};
+
+let newsFilter='all';
+
+function filterNews(f){
+  newsFilter=f;
+  ['all','stocks','crypto','macro','earnings'].forEach(id=>{
+    const btn=document.getElementById('nf-'+id);
+    if(btn){ btn.className=id===f?'btn-gold':'btn-ghost'; btn.style.fontSize='11px'; btn.style.padding='5px 12px'; }
+  });
+  renderNews();
+}
 
 function renderNews(){
   const el=document.getElementById('news-list'); if(!el) return;
-  if(!state.news.length){ el.innerHTML='<div style="color:var(--text-muted);font-size:13px;padding:8px 0;">No headlines yet.</div>'; return; }
-  el.innerHTML=state.news.map((n,i)=>`<div class="news-item">
-    <span class="news-cat ${CAT_CLS[n.cat]}">${CAT_LBL[n.cat]}</span>
-    <div><div class="news-title">${n.title}</div><div class="news-meta">${n.date} · <span onclick="removeNews(${i})" style="cursor:pointer;">remove</span></div></div>
-  </div>`).join('');
+  let items=state.news||[];
+  if(newsFilter!=='all') items=items.filter(n=>n.cat===newsFilter);
+  // Sort: pinned first, then by date added
+  const pinned=items.filter(n=>n.pinned);
+  const rest=items.filter(n=>!n.pinned);
+  const sorted=[...pinned,...rest];
+  const cnt=document.getElementById('news-count');
+  if(cnt) cnt.textContent=(state.news||[]).length+' headlines today · Showing '+(newsFilter==='all'?'all':newsFilter);
+  if(!sorted.length){
+    el.innerHTML='<div style="color:var(--text-muted);font-size:13px;padding:12px 0;">No headlines yet. Add manually above.</div>'; return;
+  }
+  el.innerHTML=sorted.map((n,i)=>{
+    const realIdx=(state.news||[]).indexOf(n);
+    const pinIcon=n.pinned?'📌 ':'';
+    const readStyle=n.read?'opacity:0.4;':'';
+    const impactStyle=IMPACT_STYLE[n.impact||'medium'];
+    return `<div style="display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);${readStyle}">
+      <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;align-items:flex-start;">
+        <span class="news-cat ${CAT_CLS[n.cat]||'cat-signal'}" style="font-size:10px">${CAT_LBL[n.cat]||n.cat}</span>
+        <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;${impactStyle}">${IMPACT_LBL[n.impact||'medium']}</span>
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:13px;line-height:1.4;font-weight:${n.pinned?'600':'400'}">${pinIcon}${n.link?`<a href="${n.link}" target="_blank" style="color:var(--text);text-decoration:none;hover:color:var(--gold)">${n.title}</a>`:n.title}</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:3px;">${n.source?`<b style="color:var(--text-dim)">${n.source}</b> · `:''} ${n.date}</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <span onclick="togglePin(${realIdx})" title="Pin" style="cursor:pointer;color:${n.pinned?'var(--gold)':'var(--text-muted)'};font-size:14px;">📌</span>
+        <span onclick="toggleRead(${realIdx})" title="Mark read" style="cursor:pointer;color:${n.read?'var(--green)':'var(--text-muted)'};font-size:14px;">${n.read?'✅':'⬜'}</span>
+        <span onclick="removeNews(${realIdx})" title="Remove" style="cursor:pointer;color:var(--text-muted);font-size:16px;">×</span>
+      </div>
+    </div>`;
+  }).join('');
 }
+
 function addNews(){
   const title=document.getElementById('news-inp').value.trim(); if(!title) return;
-  state.news.unshift({title,cat:document.getElementById('news-cat').value,date:new Date().toLocaleDateString('en-MY',{day:'numeric',month:'short'})});
-  document.getElementById('news-inp').value=''; save(); renderNews();
+  const source=document.getElementById('news-source').value.trim();
+  const link=document.getElementById('news-link').value.trim();
+  const cat=document.getElementById('news-cat').value;
+  const impact=document.getElementById('news-impact').value;
+  if(!state.news) state.news=[];
+  // Keep max 10, remove oldest unread if over limit
+  if(state.news.filter(n=>!n.pinned).length>=10){
+    const oldestIdx=state.news.map((n,i)=>({n,i})).filter(x=>!x.n.pinned).pop();
+    if(oldestIdx) state.news.splice(oldestIdx.i,1);
+  }
+  state.news.unshift({title,cat,impact,source,link,date:new Date().toLocaleDateString('en-MY',{day:'numeric',month:'short',hour12:false}),pinned:false,read:false});
+  document.getElementById('news-inp').value='';
+  document.getElementById('news-source').value='';
+  document.getElementById('news-link').value='';
+  save(); renderNews();
 }
 function removeNews(i){ state.news.splice(i,1); save(); renderNews(); }
+function togglePin(i){ state.news[i].pinned=!state.news[i].pinned; save(); renderNews(); }
+function toggleRead(i){ state.news[i].read=!state.news[i].read; save(); renderNews(); }
+
+// ── NEWS ACTIONS ──
+function renderNewsActions(){
+  const el=document.getElementById('news-actions-list'); if(!el) return;
+  el.innerHTML=(state.newsActions||[]).map((a,i)=>`<div class="task-item${a.done?' done':''}">
+    <div class="task-cb" onclick="toggleNewsAction(${i})">${a.done?'✓':''}</div>
+    <div class="task-text">${a.text}</div>
+    <span onclick="removeNewsAction(${i})" style="color:var(--text-muted);cursor:pointer;font-size:16px;">×</span>
+  </div>`).join('') || '<div style="color:var(--text-muted);font-size:13px;padding:6px 0;">Actions from today's news appear here.</div>';
+}
+function addNewsAction(){
+  const inp=document.getElementById('news-action-inp'); const text=inp.value.trim(); if(!text) return;
+  if(!state.newsActions) state.newsActions=[];
+  state.newsActions.push({text,done:false}); inp.value=''; save(); renderNewsActions();
+}
+function toggleNewsAction(i){ state.newsActions[i].done=!state.newsActions[i].done; save(); renderNewsActions(); }
+function removeNewsAction(i){ state.newsActions.splice(i,1); save(); renderNewsActions(); }
 
 // ── BIZ ──
 function renderBiz(type){
@@ -1023,6 +1698,10 @@ function setupAutoSave(){
   const na=document.getElementById('news-analysis');
   if(na){ na.value=state.newsAnalysis||''; na.addEventListener('input',()=>{ state.newsAnalysis=na.value; save(); }); }
 }
+// ── BIZ / REVIEW stubs (kept for state compat) ──
+function renderAllBiz(){}
+function saveReview(){}
+function renderReview(){}
 
 // ── OVERVIEW ──
 function refreshOverview(){
@@ -1068,11 +1747,11 @@ function seedIfEmpty(){
     {text:'Weekly P&L review',type:'review',done:false},
   ];
   if(!state.valueStocks.length) state.valueStocks=[
-    {ticker:'AAPL',curprice:'$172',quality:'Wide Moat ★★★★★',price:'$210',zone:'< $175',mos:'18%',thesis:'Ecosystem lock-in, services revenue growth, massive buybacks',risk:'China exposure, AI spend vs returns',action:'WAIT'},
-    {ticker:'MSFT',curprice:'$415',quality:'Wide Moat ★★★★★',price:'$480',zone:'< $380',mos:'13%',thesis:'Azure cloud growth + Copilot AI adoption across enterprise',risk:'OpenAI dependency, valuation premium',action:'WATCH'},
-    {ticker:'V',curprice:'$278',quality:'Wide Moat ★★★★★',price:'$340',zone:'< $260',mos:'22%',thesis:'Payment network duopoly, pricing power, capital-light model',risk:'Crypto disruption long-term, regulation',action:'BUY'},
-    {ticker:'BRK.B',curprice:'$460',quality:'Wide Moat ★★★★★',price:'$520',zone:'< $440',mos:'12%',thesis:'Diversified insurance + equity portfolio, fortress balance sheet',risk:'Succession uncertainty after Buffett',action:'WATCH'},
-    {ticker:'JNJ',curprice:'$155',quality:'Wide Moat ★★★★',price:'$180',zone:'< $148',mos:'14%',thesis:'Pharma pipeline + MedTech, defensive dividend grower',risk:'Litigation overhang, generic drug competition',action:'WATCH'},
+    {ticker:'AAPL',curprice:'$172',quality:'Wide Moat ★★★★★',price:'$210',zone:'< $175',mos:'18%',yoy:'+5% YoY',thesis:'Ecosystem lock-in, services revenue growth, massive buybacks',risk:'China exposure, AI spend vs returns',action:'WAIT'},
+    {ticker:'MSFT',curprice:'$415',quality:'Wide Moat ★★★★★',price:'$480',zone:'< $380',mos:'13%',yoy:'+15% YoY',thesis:'Azure cloud growth + Copilot AI adoption across enterprise',risk:'OpenAI dependency, valuation premium',action:'WATCH'},
+    {ticker:'V',curprice:'$278',quality:'Wide Moat ★★★★★',price:'$340',zone:'< $260',mos:'22%',yoy:'+10% YoY',thesis:'Payment network duopoly, pricing power, capital-light model',risk:'Crypto disruption long-term, regulation',action:'BUY'},
+    {ticker:'BRK.B',curprice:'$460',quality:'Wide Moat ★★★★★',price:'$520',zone:'< $440',mos:'12%',yoy:'+5% YoY',thesis:'Diversified insurance + equity portfolio, fortress balance sheet',risk:'Succession uncertainty after Buffett',action:'WATCH'},
+    {ticker:'JNJ',curprice:'$155',quality:'Wide Moat ★★★★',price:'$180',zone:'< $148',mos:'14%',yoy:'+3% YoY',thesis:'Pharma pipeline + MedTech, defensive dividend grower',risk:'Litigation overhang, generic drug competition',action:'WATCH'},
   ];
   if(!state.growthStocks.length) state.growthStocks=[
     {ticker:'NVDA',sector:'AI / Semiconductors',curprice:'$880',price:'$974',growth:'+122% YoY',fiveyr:'+85%/yr',peg:'1.8',thesis:'AI compute dominance, data center GPU near-monopoly',risk:'China export restrictions, AMD/custom chip competition',action:'WAIT'},
@@ -1082,19 +1761,29 @@ function seedIfEmpty(){
     {ticker:'AMZN',sector:'Cloud / E-commerce',curprice:'$188',price:'$230',growth:'+17% YoY',fiveyr:'+18%/yr',peg:'2.1',thesis:'AWS dominance in cloud, ad revenue growing fast, Prime flywheel',risk:'Antitrust risk, AWS competition from Microsoft/Google',action:'WATCH'},
   ];
   if(!(state.techStocks&&state.techStocks.length)) state.techStocks=[
-    {ticker:'NVDA',curprice:'$880',sector:'AI / Semiconductors',fiveyr:'+85%/yr',growth:'+122% YoY',zone:'< $700',thesis:'AI GPU monopoly for data centers, CUDA ecosystem lock-in',risk:'China export ban, AMD/custom ASIC competition',action:'WAIT'},
-    {ticker:'AVGO',curprice:'$185',sector:'Semiconductors / AI',fiveyr:'+42%/yr',growth:'+51% YoY',zone:'< $160',thesis:'AI custom chip leader (Google, Meta), networking dominance',risk:'Customer concentration, VMware integration risk',action:'WATCH'},
-    {ticker:'AMD',curprice:'$95',sector:'Semiconductors',fiveyr:'+38%/yr',growth:'+18% YoY',zone:'< $85',thesis:'MI300X GPU challenger to NVDA, data center + PC CPU share gains',risk:'Still far behind NVDA in AI software ecosystem',action:'WATCH'},
-    {ticker:'META',curprice:'$512',sector:'Social / AI',fiveyr:'+30%/yr',growth:'+27% YoY',zone:'< $450',thesis:'AI-powered ad targeting + Llama open-source strategy',risk:'Regulatory antitrust risk, VR capex burn',action:'BUY'},
-    {ticker:'TSLA',curprice:'$175',sector:'EV / Robotics / Energy',fiveyr:'+32%/yr',growth:'+2% YoY',zone:'< $150',thesis:'FSD + Optimus robot optionality, energy storage growth',risk:'EV price war, Musk distraction, execution risk',action:'WAIT'},
-    {ticker:'PLTR',curprice:'$24',sector:'AI / Data / Defense',fiveyr:'+35%/yr',growth:'+29% YoY',zone:'< $20',thesis:'AIP platform gaining commercial traction, US govt moat',risk:'High valuation, reliance on govt contracts',action:'WATCH'},
-    {ticker:'ARM',curprice:'$105',sector:'Semiconductors / AI',fiveyr:'N/A (IPO 2023)',growth:'+23% YoY',zone:'< $90',thesis:'CPU architecture licensing dominates mobile, expanding into AI/data center',risk:'Customer concentration (Apple), RISC-V long-term threat',action:'WATCH'},
-    {ticker:'SMCI',curprice:'$42',sector:'AI Servers',fiveyr:'+60%/yr',growth:'+110% YoY',zone:'< $35',thesis:'AI server infrastructure supplier, direct NVDA GPU integrator',risk:'Accounting issues, DELL/HPE competition, volatile earnings',action:'WATCH'},
+    {ticker:'NVDA',curprice:'$201',sector:'AI / Semiconductors',fiveyr:'+85%/yr',growth:'+122% YoY',fairval:'$250',target:'$266',mos:'+20%',zone:'< $190',thesis:'AI GPU monopoly for data centers, CUDA ecosystem lock-in. Blackwell architecture leads by 2 generations.',risk:'China export ban, AMD/custom ASIC competition, capex slowdown',action:'WAIT'},
+    {ticker:'AMD',curprice:'$108',sector:'Semiconductors / AI',fiveyr:'+38%/yr',growth:'+18% YoY',fairval:'$235',target:'$265',mos:'+54%',zone:'< $95',thesis:'Only credible NVDA challenger. EPYC CPU gaining data center share. Bernstein target $265.',risk:'ROCm software ecosystem far behind CUDA. Gaming declining.',action:'WATCH'},
+    {ticker:'AVGO',curprice:'$399',sector:'Semiconductors / AI Custom Chips',fiveyr:'+42%/yr',growth:'+51% YoY',fairval:'$430',target:'$456',mos:'+8%',zone:'< $360',thesis:'Custom AI chip king — Meta deploying 1GW+ MTIA chips. Google, Apple also customers.',risk:'Customer concentration, VMware integration risk. Limited MoS now.',action:'WATCH'},
+    {ticker:'TSM',curprice:'$366',sector:'Semiconductor Manufacturing',fiveyr:'+20%/yr',growth:'+35% YoY',fairval:'$420',target:'$458',mos:'+13%',zone:'< $340',thesis:'Irreplaceable monopoly on 3nm/2nm. Q1 revenue +35%, net income +51% YoY. Every AI chip runs here.',risk:'Taiwan geopolitical risk — biggest binary risk in global markets.',action:'WATCH'},
+    {ticker:'ASML',curprice:'$700',sector:'Semiconductor Equipment',fiveyr:'+22%/yr',growth:'+20% YoY',fairval:'$730',target:'$850',mos:'+4%',zone:'< $620',thesis:'Only maker of EUV lithography machines. Without ASML no advanced chips exist. GS target €1,570.',risk:'P/E 49x — near fair value now. China export restrictions. Q2 below consensus.',action:'WATCH'},
+    {ticker:'META',curprice:'$627',sector:'Social Media / AI Advertising',fiveyr:'+30%/yr',growth:'+27% YoY',fairval:'$800',target:'$856',mos:'+22%',zone:'< $580',thesis:'AI ad targeting at $60B annual run rate. 78 analysts, zero sell ratings. Q1 earnings April 29.',risk:'Reality Labs losing $19B/yr. $115–135B capex 2026 unproven ROI.',action:'BUY'},
+    {ticker:'GOOGL',curprice:'$336',sector:'Search / Cloud / AI',fiveyr:'+14%/yr',growth:'+14% YoY',fairval:'$340',target:'$355',mos:'+1%',zone:'< $290',thesis:'Cheapest Mag7. Google Cloud +28%. Gemini AI across Search + Workspace. $70B/yr buybacks.',risk:'AI search disruption. DOJ antitrust ruling on search monopoly.',action:'WATCH'},
+    {ticker:'TSLA',curprice:'$347',sector:'EV / Robotics / Energy',fiveyr:'+32%/yr',growth:'+2% YoY',fairval:'$280',target:'$397',mos:'-19%',zone:'< $180',thesis:'FSD + Optimus robot optionality. Energy storage growing. Q1 earnings April 22. Speculative premium.',risk:'EV margin compression. BYD price war. Musk distraction. Negative MoS on fundamentals.',action:'WATCH'},
+    {ticker:'MU',curprice:'$448',sector:'Memory Semiconductors',fiveyr:'+12%/yr',growth:'+38% YoY',fairval:'$150',target:'$145',mos:'-66%',zone:'< $100',thesis:'HBM3E in every NVDA Blackwell GPU. DRAM oligopoly — 3 suppliers only. Massive cycle leverage.',risk:'Peak-cycle multiples. If AI capex slows 20%, could fall 40-50%. Highly cyclical.',action:'WATCH'},
+    {ticker:'PLTR',curprice:'$145',sector:'AI / Data / Defense',fiveyr:'+35%/yr',growth:'+29% YoY',fairval:'$80',target:'$120',mos:'-45%',zone:'< $80',thesis:'AIP platform gaining commercial traction. US government AI moat. Strong revenue growth.',risk:'Extremely high valuation. P/S ratio stretched. Reliance on US govt contracts.',action:'WATCH'},
+    {ticker:'SMCI',curprice:'$42',sector:'AI Servers',fiveyr:'+60%/yr',growth:'+110% YoY',fairval:'$50',target:'$55',mos:'+16%',zone:'< $35',thesis:'AI server infrastructure supplier, direct NVDA GPU integrator. Huge growth if AI capex sustains.',risk:'Accounting/audit issues. DELL/HPE competition. Volatile earnings. High execution risk.',action:'WATCH'},
   ];
-  if(!state.news.length) state.news=[
-    {title:'Fed holds rates, signals 2 cuts in H2 2026 — dot plot unchanged',cat:'macro',date:'18 Apr'},
-    {title:'Bitcoin ETF inflows hit $400M weekly high on institutional demand',cat:'crypto',date:'18 Apr'},
-    {title:'US tariff pause extended 90 days — Asian markets rally',cat:'geo',date:'17 Apr'},
+  if(!state.news||!state.news.length) state.news=[
+    {title:'Fed holds rates, signals 2 cuts in H2 2026 — dot plot unchanged',cat:'macro',impact:'high',source:'Federal Reserve',link:'',date:'18 Apr',pinned:true,read:false},
+    {title:'Bitcoin ETF inflows hit $400M weekly high on institutional demand',cat:'crypto',impact:'high',source:'Bloomberg',link:'',date:'18 Apr',pinned:false,read:false},
+    {title:'US tariff pause extended 90 days — Asian markets rally strongly',cat:'geo',impact:'high',source:'Reuters',link:'',date:'17 Apr',pinned:false,read:false},
+    {title:'TSLA Q1 earnings April 22 — analysts watching margin recovery and FSD update',cat:'earnings',impact:'high',source:'Yahoo Finance',link:'',date:'21 Apr',pinned:false,read:false},
+    {title:'META, MSFT, GOOGL, AMZN all report Q1 on April 29–30',cat:'earnings',impact:'high',source:'Earnings Whispers',link:'',date:'21 Apr',pinned:true,read:false},
+    {title:'NVDA Blackwell GPU allocation sold out through Q3 2026 — demand remains exceptional',cat:'stocks',impact:'medium',source:'DigiTimes',link:'',date:'20 Apr',pinned:false,read:false},
+    {title:'Solana DEX volume hits record in Q1 2026 — surpasses Ethereum for spot trading',cat:'crypto',impact:'medium',source:'DeFiLlama',link:'',date:'19 Apr',pinned:false,read:false},
+    {title:'AMD price target raised to $265 at Bernstein — MI300X demand accelerating',cat:'stocks',impact:'medium',source:'Bernstein',link:'',date:'16 Apr',pinned:false,read:false},
+    {title:'TSMC lifts 2026 revenue outlook above 30% USD growth — AI chip demand surging',cat:'stocks',impact:'high',source:'TSMC IR',link:'',date:'16 Apr',pinned:false,read:false},
+    {title:'Goldman Sachs raises ASML target to €1,570 on strong EUV order backlog',cat:'stocks',impact:'medium',source:'Goldman Sachs',link:'',date:'16 Apr',pinned:false,read:false},
   ];
   if(!(state.biz.ai||[]).length){
     state.biz.ai=['Claude Sonnet 4.6 extended thinking — test for content automation pipeline','Sora video quality closing gap vs live production — opportunity for wedding content'];
@@ -1102,6 +1791,19 @@ function seedIfEmpty(){
     state.biz.creator=['TikTok Shop integration growing in SEA — evaluate for product gifting campaigns'];
     state.biz.web3=['MAS (Singapore) advancing stablecoin regulatory framework — monitor for SEA impact'];
   }
+  if(!(state.stockActions&&state.stockActions.length)) state.stockActions=[
+    {text:'Check NVDA — if below $190 start accumulating position',type:'stock-buy',done:false},
+    {text:'Review META position ahead of April 29 earnings',type:'stock-watch',done:false},
+    {text:'AMD — add if drops below $95, highest MoS on watchlist',type:'stock-buy',done:false},
+    {text:'AMZN — monitor ahead of April 30 AWS earnings call',type:'stock-watch',done:false},
+  ];
+  if(!(state.cryptoActions&&state.cryptoActions.length)) state.cryptoActions=[
+    {text:'BTC — buy zone below $80k if CNN F&G drops under 25',type:'crypto-buy',done:false},
+    {text:'ETH — watch for entry below $1,500 on macro fear',type:'crypto-watch',done:false},
+    {text:'SOL — take partial profit if reaches $200+',type:'crypto-sell',done:false},
+    {text:'Set stop loss BNB at $580 to protect position',type:'crypto-risk',done:false},
+  ];
+  if(!(state.newsActions&&state.newsActions.length)) state.newsActions=[];
   if(!(state.decisions.buy||[]).length) state.decisions={
     buy:['Add to V (Visa) if drops below $260 — strong MoS','META — already in buy zone, strong AI monetisation thesis'],
     wait:['BTC spot — wait for Fear & Greed below 25 before buying','NVDA — wait for pullback, current valuation too stretched'],
@@ -1114,10 +1816,11 @@ function seedIfEmpty(){
 // ── INIT ──
 function init(){
   load(); seedIfEmpty(); setQuote();
-  renderTasks(); renderValueStocks(); renderGrowthStocks(); renderTechStocks();
-  renderCryptoCards(null); renderNews(); renderAllBiz(); renderDecisions(); renderReview();
+  renderTasks(); renderValueStocks(); renderGrowthStocks(); renderTechStocks(); renderResearchCards();
+  renderCryptoCards(null); renderNews(); renderNewsActions(); renderDecisions(); renderStockActions(); renderCryptoActions();
   setupAutoSave(); loadApiKeys(); refreshOverview();
   setTimeout(fetchCryptoPrices, 500);
+  setTimeout(fetchResearchPrices, 1500);
   setTimeout(fetchCryptoFG, 1000);
   // Auto-refresh crypto F&G every 30 min
   setInterval(fetchCryptoFG, 30*60*1000);
